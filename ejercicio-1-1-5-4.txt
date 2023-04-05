@@ -1,0 +1,22 @@
+Accion ejercicio 1.1.5.4 Es
+
+Ambiente
+  longitud_menor, longitud_mayor, altura, superficie:real;
+
+Proceso
+  Escribir("Ingrese el valor de la base menor: ");
+  Leer(longitud_menor);
+  Escribir("Ingrese el valor de la base mayor: ");
+  Leer(longitud_mayor);
+  Escribir("Ingrese el valor de la altura: ");
+  Leer(altura);
+
+  superficie := ((longitud_menor + longitud_mayor) * h) / 2 ;
+
+  Escribir("Los valores finales obtenidos son: );
+  Escribir("Superficie del trapecio: ",superficie);
+  Escribir("Base mayor: ",longitud_mayor);
+  Escribir("Base menor: ",longitud_menor);
+  Escribir("Altura: ",altura);
+
+  Fin_Accion
