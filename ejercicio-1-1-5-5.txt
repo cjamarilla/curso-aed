@@ -1,0 +1,18 @@
+Accion ejercicio 1.1.5.5 Es
+
+Ambiente
+seccion, corriente, conductividad, seccion_seguridad:real;
+
+Proceso
+  Escribir("Ingrese la corriente electrica: ");
+  Leer(corriente);
+  Escribir("Ingrese conductividad del material: ");
+  Leer(conductividad);
+
+  seccion := corriente / conductividad;
+  seccion_seguridad := seccion * 1.25;
+
+  Escribir("La seccion del conductor es: ",seccion);
+  Escribir("La seccion con el 25% de incremento es: ",seccion_seguridad);
+
+  Fin_Accion
