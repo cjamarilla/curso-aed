@@ -1,5 +1,5 @@
 # curso-aed
-##Estructuras Secuenciales
+## Estructuras Secuenciales
 -Ejercicio 1.1.5.1 [x]
 -Ejercicio 1.1.5.2 [x]
 -Ejercicio 1.1.5.3 [x]
@@ -8,8 +8,8 @@
 -Ejercicio 1.1.5.6 [x]
 -Ejercicio 1.1.5.7 [x]
 
-##Esctructuras Condicionales y repetitivas
--Ejercicio 1.1.6 []
+## Esctructuras Condicionales y repetitivas
+-Ejercicio 1.1.6 [x]
 -Ejercicio 1.1.7 []
 -Ejercicio 1.1.8 []
 -Ejercicio 1.1.9 []

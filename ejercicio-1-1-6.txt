@@ -1,0 +1,24 @@
+Accion ejercicio 1.1.6 Es
+
+Ambiente
+n1,n2,n3:entero;
+
+Proceso
+  Escribir("Ingrese el primer valor: ");
+  Leer(n1);
+  Escribir("Ingrese el segundo valor: ");
+  Leer(n2);
+  Escribir("Ingrese el tercer valor: ");
+  Leer(n3);
+  
+  Si (n1>n2) y (n2>n3) Entonces
+    Escribir("El mayor es: ",n1);
+    Sino 
+      Si ((n2>n1) y (n1>n3)) Entonces
+        Escribir("El mayor es: ",n2);
+        Sino
+          Si ((n3>n2) y (n2>n1)) Entonces
+        Escribir("El mayor es: ",n3);
+        Sino
+          Escribir ("Los numeros son iguales");
+Fin_Accion
