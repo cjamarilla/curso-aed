@@ -1,0 +1,23 @@
+Accion ejercicio 1.1.5.3 Es
+
+Ambiente
+  costo_pc, costo_impresora, ganancia_pc, ganancia_impresora, precio_total; 
+  iva=0,21;
+
+Proceso
+  Escribir("Ingrese costo de pc: ");
+  Leer(costo_pc);
+  Escribir("Ingrese costo de impresora: ");
+  Leer(costo_impresora);
+
+  ganancia_pc := costo_pc * 0.12;
+  ganancia_impresora := costo_impresora * 0.7;
+
+
+  precio_total := costo_pc + ganancia_pc + costo_impresora + ganancia_impresora;
+
+  precio_total := precio_total * iva ;
+
+  Escribir("El precio total de venta es ",precio_total);
+
+  Fin_Accion
