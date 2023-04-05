@@ -1,0 +1,21 @@
+Accion ejercicio 1.1.5.7 Es
+
+Ambiente
+x, y, z, media:real;
+
+Proceso
+  Escribir("Ingrese el primer valor: ");
+  Leer(x);
+  Escribir("Ingrese el segundo valor: ");
+  Leer(y);
+  Escribir("Ingrese el tercer valor: ");
+  Leer(z);
+
+  media := (x * y * z)/3;
+
+  Escribir("El primer valor ingresado es: ",x);
+  Escribir("El segundo valor ingresado es: "y);
+  Escribir("El tercer valor ingresado es: ",z);
+  Escribir("La media geometrica es: ",media);
+
+  Fin_Accion
