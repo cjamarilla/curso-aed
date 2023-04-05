@@ -1,0 +1,21 @@
+Accion ejercicio 1.1.5.2 Es
+
+Ambiente
+a,b,c,discriminante:real;
+
+Proceso
+Escribir("Ingrese el valor de a: ");
+Leer(a);
+Escribir("Ingrese el valor de b: ");
+Leer(b);
+Escribir("Ingrese el valor de c: ");
+Leer(c);
+
+discriminante = b * b - 4 * a * c;
+
+Si(discriminante<0) entonces
+  Escribir("El discriminante es negativo, las raices son imaginarias);
+  Sino
+    Escribir("El discriminante es positivo, las raices son reales);
+Fin_Accion
+
