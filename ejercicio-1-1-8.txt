@@ -1,0 +1,25 @@
+Accion ejercicio 1.1.8 Es
+
+Ambiente
+dia_nacimiento, dia_actual: 1..31;
+mes_nacimiento, mes_actual: 1..12; 
+anio_nacimiento, anio_actual, edad:entero;
+
+Proceso
+  Escribir("Ingrese el año,mes y dia de nacimeinto);
+  Leer(anio_nacimiento,mes_nacimiento,dia_nacimiento);
+  Escribir("Ingrese el año,mes y dia actual: ");
+  Leer(anio_actual,mes_actual,dia_actual);
+
+  edad := anio_actual - anio_nacimiento;
+
+    Si (dia_actual < dia_nacimiento) Entonces
+      edad:= edad - 1;
+      Sino
+        Si (mes_actual < mes_nacimiento) Entonces
+          edad := edad -1;
+        Fin_Si
+    Fin_Si
+    Escribir("La edad de la persona es : ", edad);
+Fin_Accion
+  

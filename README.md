@@ -10,8 +10,8 @@
 
 ## Esctructuras Condicionales y repetitivas
 - Ejercicio 1.1.6 [x]
-- Ejercicio 1.1.7 []
-- Ejercicio 1.1.8 []
+- Ejercicio 1.1.7 [x]
+- Ejercicio 1.1.8 [x]
 - Ejercicio 1.1.9 []
 - Ejercicio 1.1.10 []
 - Ejercicio 1.1.11 []

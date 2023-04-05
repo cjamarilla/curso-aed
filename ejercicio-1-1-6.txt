@@ -18,7 +18,10 @@ Proceso
         Escribir("El mayor es: ",n2);
         Sino
           Si ((n3>n2) y (n2>n1)) Entonces
-        Escribir("El mayor es: ",n3);
-        Sino
-          Escribir ("Los numeros son iguales");
+            Escribir("El mayor es: ",n3);
+            Sino
+              Escribir ("Los numeros son iguales");
+          Fin_Si
+      Fin_Si
+  Fin_Si        
 Fin_Accion
