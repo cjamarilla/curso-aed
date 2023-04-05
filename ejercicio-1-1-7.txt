@@ -1,0 +1,20 @@
+Accion ejercicio 1.1.7 Es
+
+Ambiente
+  n1,n2,suma:entero;
+
+Proceso
+  Escribir("Ingrese un numero: ");
+  Leer(n1);
+  Escribir("Ingrese otro numero: ");
+  Leer(n2);
+
+  suma := n1 + n2 ;
+
+  Segun (suma) Hacer
+    <=50:  Escribir	("La suma es menor o igual a 50");                  
+		<=100: Escribir	("La suma es mayor a 50 y menor o igual que 100");		
+		<=200: Escribir ("La suma es mayor a 100 y menor o igual que 200");
+		>200:  Escribir ("La suma es mayor a 200");
+	Fin_Segun;
+FinAccion.

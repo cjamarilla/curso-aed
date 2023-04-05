@@ -1,4 +1,4 @@
-# curso-aed
+# Curso-Algoritmos y Estructuras de Datos
 ## Estructuras Secuenciales
 - Ejercicio 1.1.5.1 [x]
 - Ejercicio 1.1.5.2 [x]
