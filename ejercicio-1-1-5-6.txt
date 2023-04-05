@@ -1,0 +1,22 @@
+Accion ejercicio 1.1.5.6 Es
+
+Ambiente
+a,b,c,d,producto: real;
+r, i:real
+Proceso
+  Escribir("Ingrese la parte real del primer numero: ");
+  Leer(a);
+  Escribir("Ingrese la parte imaginaria del primer numero: ");
+  Leer(b);
+  Escribir("Ingrese la parte real del segundo numero: ");
+  Leer(c);
+  Escribir("Ingrese la parte imaginaria del segundo numero: ");
+  Leer(d);
+
+  r := (a * c - b * d);
+  i := (a * d + b * c);
+
+  Escribir("El producto es: ", r ," ,", i ," i ");
+  
+  Fin_Accion
+
