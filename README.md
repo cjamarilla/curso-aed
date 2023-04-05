@@ -1,2 +1,4 @@
 # curso-aed
-*Ejercicio 1.1.5.1 [X]
+##Estructuras Secuenciales
+*Ejercicio 1.1.5.1 [x]
+*Ejercicio 1.1.5.2 [x]
