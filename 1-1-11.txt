@@ -1,0 +1,21 @@
+Accion 1.1.11 Es
+
+Ambiente
+dato, dato_usuario: entero;
+
+Proceso
+  Escribir("Ingrese año actual: ");
+  Leer(dato);
+  Escribir("Ingrese un año");
+  Leer(dato_usuario);
+
+    Si (dato_usuario = dato) Entonces
+      Escribir("ACTUAL");
+      Sino 
+        Si (dato_usuario > dato) Entonces
+          Escribir("FUTURO");
+          Sino
+            Escribir("PASADO");
+        FinSi
+    FinSi
+FinAccion    
