@@ -1,0 +1,33 @@
+Accion ejercicio 1.1.9 Es
+
+Ambiente
+ahorro_dolares, cotizacion_dolares, cotizacion_euro, euros_necesarios, diferencia, ahorro_euro: real;
+
+Proceso
+  Escribir("Ingrese la cantidad de euros que necesita: ");
+  Leer(euros_necesarios);
+  Escribir("Ingrese la cotizacion de dolar a pesos: ");
+  Leer(cotizacion_dolares);
+  Escibir("Ingrese la cotizacion de euros a pesos: ");
+  Leer(cotizacion_euro);
+  Escribir("Ingrese la cantidad de dolares que tiene ahorrado: ");
+  Leer(ahorro_dolares);
+
+ahorro_euro:= ahorro_dolares / cotizacion_dolares * (1 /cotizacion_euro);
+
+  Escribir("La cantidad de euros que se puede adquirir con los dolares ahorrados son:",ahorro_euro);
+
+diferencia :=  euros_necesarios - ahorro_euro ;
+
+  Si(diferencia <= 0) Entonces
+    Escribir("El dinero ahorrado es suficiente");
+    Escribir("Sobran", -diferencia * cotizacion_euro, "Pesos"); 
+    Sino
+        Escribir("El dinero ahorrado es insuficiente");
+        Escribir("Faltan", diferencia * cotizacion_euro, "Pesos");
+  FinSi
+
+FinAccion
+
+
+
