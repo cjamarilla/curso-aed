@@ -1,0 +1,21 @@
+Accion Ejercicio 1.1.10 Es
+
+Ambiente
+n1,n2: entero;
+
+Proceso
+  Escribir("Ingrese el primer valor: ");
+  Leer(n1);
+  Escribir("Ingrese el segundo valor: ");
+  Leer(n2);
+  Si (n1 % n2 = 0) Entonces
+    Escribir(n1, "es divisor de ", n2);
+    Sino
+      Si (n2 % n1 =0) Entonces
+        Escribir(n2, "es divisor de ", n1);
+          Sino
+            Escribir(n1,"y",n2, "No son divisibles");
+      FinSi
+  FinSi
+
+FinAccion   
