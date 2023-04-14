@@ -1,0 +1,58 @@
+Accion 1.1.15.1 Es
+
+Ambiente
+metros_a_pies= 3.28, pisos, altura, altura_final=0: real;
+
+Proceso
+  Escribir("Ingrese la cantidad de pisos que tiene el edificio: ");
+  Leer(pisos);
+  Escribir("Ingrese la altura de cada piso: ");
+  Leer(altura);
+
+  altura_final := (pisos * altura) * metros_a_pies;
+
+  Escribir("La altura aproximada del edificio ingresado es : ", altura_final );
+
+FinAccion
+
+
+Accion 1.1.15.2 Es
+
+Ambiente
+metros_a_pies= 3.28, pisos, altura, altura_final=0, i:real;
+
+PARA (i=1 HASTA 50) HACER
+  Escribir("Datos de edificio N#",i,":");
+  Escribir("Ingrese la cantidad de pisos que tiene el edificio: ");
+  Leer(pisos);
+  Escribir("Ingrese la altura de cada piso: ");
+  Leer(altura);
+
+  altura_final := (pisos * altura) * metros_a_pies;
+
+  Escribir("La altura aproximada del edificio ingresado es : ", altura_final );
+FinPara
+
+FinAccion
+
+
+Accion 1.1.15.3 Es
+
+Ambiente
+metros_a_pies= 3.28, pisos, altura, altura_final=0, i, cantidad:real;
+Escribir("Ingrese la cantidad de edificios que desea calcular: ");
+Leer(cantidad)
+
+PARA (i=1 HASTA cantidad) HACER
+  Escribir("Datos de edificio N#",i,":");
+  Escribir("Ingrese la cantidad de pisos que tiene el edificio: ");
+  Leer(pisos);
+  Escribir("Ingrese la altura de cada piso: ");
+  Leer(altura);
+
+  altura_final := (pisos * altura) * metros_a_pies;
+
+  Escribir("La altura aproximada del edificio ingresado es : ", altura_final );
+FinPara
+  
+FinAccion
