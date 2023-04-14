@@ -1,0 +1,78 @@
+Accion 1.1.16 Es
+
+Ambiente
+isi, iq, iem, egresados_total:entero;
+porcentaje_isi, porcentaje_iq, porcentaje_iem: reales;
+
+Proceso
+  Escribir("Ingrese el total de egresados de ISI: "); Leer(isi);
+  Escribir("Ingrese el total de egresados de IQ: "); Leer(iq);
+  Escribir("Ingrese el total de egresados de IEM: "); Leer(iem);
+
+egresados_total:= isi + iem + iq ;
+
+porcentaje_isi := (isi * 100) div egresados_total;
+porcentaje_iq := (iq * 100) div egresados_total;
+porcentaje_iem := (iem * 100) div egresados_total;
+
+Escribir("El porcentaje de egresados de ISI es ",porcentaje_isi,"%");
+Escribir("El porcentaje de egresados de IQ es ",porcentaje_iq,"%");
+Escribir("El porcentaje de egresados de IEM es ",porcentaje_iem,"%");
+
+FinAccion
+
+
+-----------------------------------------------------------------------------
+
+
+Accion 1.1.16.2 Es
+
+Ambiente
+isi, iq, iem, egresados_total, num_facu, acumulador_isi, acumulador_iq, acumulador_iem, total:entero;
+porcentaje_isi, porcentaje_iq, porcentaje_iem: reales;
+opcion: caracter;
+
+Proceso
+acumulador_iem :=0;
+acumulador_iq :=0;
+acumulador_isi :=0;
+total:=0;
+num_facu:=0;
+
+REPETIR
+  num_facu := num_facu +1;
+  Escribir("Facultad N° ", num_facu, ":");
+  Escribir("Ingrese el total de egresados de ISI: "); 
+  Leer(isi);
+  Escribir("Ingrese el total de egresados de IQ: ");
+  Leer(iq);
+  Escribir("Ingrese el total de egresados de IEM: "); 
+  Leer(iem);
+
+  egresados_total:= isi + iem + iq ;
+
+  porcentaje_isi := (isi * 100) div egresados_total;
+  porcentaje_iq := (iq * 100) div egresados_total;
+  porcentaje_iem := (iem * 100) div egresados_total;
+
+
+  acumulador_isi := acumulador_isi + isi;
+  acumulador_iq := acumulador_iq + iq ;
+  acumulador_iem := acumulador_iem + iem;
+
+  total := total + egresados_total;
+
+  Escribir("El porcentaje de egresados de ISI es ",porcentaje_isi,"%");
+  Escribir("El porcentaje de egresados de IQ es ",porcentaje_iq,"%");
+  Escribir("El porcentaje de egresados de IEM es ",porcentaje_iem,"%");
+  Escribir("¿Desea agregar datos de una siguiente facultad ? (S/N): ");
+  Leer(opcion);
+  
+HASTA QUE (opcion = 'N' o opcion = 'n');
+
+   Escribir("El total de egresados de ISI es: ", acumulador_isi);
+    Escribir("El total de egresados de IQ es: ",acumulador_iq);
+    Escribir("El total de egresados de IEM es: ", acumulador_iem);
+    Escribir("El total general de alumnos entre las facultades es: ", total);
+
+FinAccion
