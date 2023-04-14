@@ -1,0 +1,43 @@
+Accion 1.1.14 Es
+
+Ambiente
+n, s, v, primer_s=0, num_mismos_s=0, primer_s_mayor_v=-1, num_s_doble_v=0,productoria_s_nulos=1, i:entero;
+
+Proceso
+  Escribir("Ingrese cuantos pares de numeros tiene: ");
+  Leer(n);
+
+  PARA (i:=0 HASTA n) HACER
+    Escribir("Ingrese el valor de s y v :");
+    Leer(s,v);
+
+    Si(i = 0) Entonces
+      primer_s:= s;
+    FinSi
+
+    Si(s = primer_s) Entonces
+      num_mismos_s:= num_mismos_s +1;
+    FinSi
+
+    Si( v<s y (primer_s_mayor_v = -1 o s < primer_s_mayor_v)) Entonces
+      primer_s_mayor_v := s;
+    FinSi
+
+    Si(s= 2 * v) Entonces
+      num_s_doble_v:= num_s_doble_v +1;
+    FinSi
+
+    Si( v = 0 y s != 0) Entonces
+      productoria_s_nulos= productoria_s_nulos * s;
+    FinSi
+  
+
+  Escribir("La cantidad de numero iguales es: ",num_mismos_s);
+  Escribir("La cantidad de s mayores es: ",primer_s_mayor_v);
+  Escribir("La cantidad de numeros mayores que v: ",num_s_doble_v);
+  Escribir("La cantidad de numeros s nulos: ",productoria_s_nulos);
+
+  FinAccion
+  
+
+
