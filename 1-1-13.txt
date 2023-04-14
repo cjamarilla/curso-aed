@@ -1,0 +1,26 @@
+Accion 1.1.13 Es
+
+Ambiente
+num, cien, diez, uno:entero;
+rango:boleano;
+
+Proceso
+REPETIR
+  Escribir("Ingrese un numero entero entre 100 y 1000: ");
+  Leer(num);
+  rango:=(num>=100 y num<=999);
+  Si(!rango) Entonces
+    Escribir("El numero ingresado esta fuera del rango requerido");
+  FinSi
+HASTA QUE(!rango);
+
+cien:= numero / 100;
+diez:= (num mod 100) /10;
+uno := (num mod 100) mod 10;
+
+Escribir("Para la suma de ",num,"se necesita: ");
+Escribir("Billetes de cien: ",cien);
+Escribir("Billetes de diez: ",diez);
+Escribir("Billetes de uno: ",uno);
+
+FinAccion
