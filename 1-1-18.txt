@@ -1,0 +1,25 @@
+Accion 1.1.18 Es
+
+  Ambiente
+  f,g,ciente,resto,diferencia:entero;
+
+  Proceso
+    Escribir("Ingrese el valor de f: ");
+    Leer(f);
+    Escribir("Ingrese el valor de g: ");
+    Leer(g);
+
+    cociente:= 0;
+    resto:= 0;
+
+    Mientras (f <= g) Hacer
+      f := f -g ;
+      cociente := cociente +1 ;
+    FinMientras
+
+    resto := f;
+
+    Escribir("El cociente es: ",cociente);
+    Escribir("El resto es: ",resto);
+
+FinAccion
