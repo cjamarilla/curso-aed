@@ -1,0 +1,21 @@
+Accion 1.1.17 Es
+
+Ambiente
+a,b,suma:entero;
+
+Proceso
+  Escribir("Ingrese un numero: ");
+  Leer(a);
+  Escribir("Ingrese otro numero: ");
+  Leer(b);
+
+  suma:=0;
+
+  Mientras (b != 0) HACER
+    suma := suma + a ;
+    b := b - 1;
+  FinMientras
+
+  Escribir("El resultado de la suma es: ",suma);
+
+  FinAccion
