@@ -1,0 +1,30 @@
+Accion 1.1.19 Es
+
+  Ambiente
+  v,cubo,cuadrado,i,j:entero;
+
+  Proceso
+    Escribir("Ingrese el valor de v: ");
+    Leer(v);
+
+    cuadrado:= 0;
+    cubo:=0;
+    i:=3;
+    j:=2;
+
+    MIENTRAS (i>0) Hacer
+      cubo := cubo + v ;
+      i := i-1;
+    FinMientras
+
+    MIENTRAS (j>0) Hacer
+      cuadrado := cuadrado + v ;
+      j := j-1;
+    FinMientras
+
+    Escribir("El numero ingresado es: ",v);
+    Escribir("El cuadrado es: ",cuadrado);
+    Escribir("El cubo es: ",cubo);
+
+FinAccion
+

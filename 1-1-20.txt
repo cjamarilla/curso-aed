@@ -1,0 +1,21 @@
+Accion 1.1.20 Es
+
+  Ambiente
+  v, cubo, cuadrado: entero;
+
+  Proceso
+    Escribir("Ingrese el valor de v: ");
+    Leer(v);
+
+    Para i = 1 hasta 10 Hacer
+      cuadrado := v * v;
+      cubo := v * v * v;
+
+      Escribir("El numero ingresado es: ",v);
+      Escribir("El cuadrado es: ",cuadrado);
+      Escribir("El cubo es: ",cubo);
+
+      v := v + 1;
+    FinPara
+
+FinAccion
