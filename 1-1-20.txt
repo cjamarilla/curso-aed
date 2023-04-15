@@ -1,21 +1,29 @@
-Accion 1.1.20 Es
+Accion 1.1.20_v2
+    Ambiente
+        v, cubo, cuadrado, n, suma_cuadrados: entero;
 
-  Ambiente
-  v, cubo, cuadrado: entero;
+    Proceso
+        Escribir("Ingrese el valor de v: ");
+        Leer(v);
 
-  Proceso
-    Escribir("Ingrese el valor de v: ");
-    Leer(v);
+        Escribir("Ingrese la cantidad de veces que se calcularán los valores: ");
+        Leer(n);
 
-    Para i = 1 hasta 10 Hacer
-      cuadrado := v * v;
-      cubo := v * v * v;
+        suma_cuadrados := 0; // Inicializamos la variable suma_cuadrados en 0
 
-      Escribir("El numero ingresado es: ",v);
-      Escribir("El cuadrado es: ",cuadrado);
-      Escribir("El cubo es: ",cubo);
+        Para i := 1 hasta n Hacer
+            cuadrado := v * v;
+            cubo := v * v * v;
 
-      v := v + 1;
-    FinPara
+            Escribir("El numero ingresado es: ",v);
+            Escribir("El cuadrado es: ",cuadrado);
+            Escribir("El cubo es: ",cubo);
 
-FinAccion
+            suma_cuadrados := suma_cuadrados + cuadrado; // Sumamos el cuadrado actual a la variable suma_cuadrados
+
+            v := v + 1;
+        FinPara
+
+        Escribir("La suma de los cuadrados es: ", suma_cuadrados);
+
+    FinAccion
