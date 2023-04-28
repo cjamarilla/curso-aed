@@ -1,0 +1,36 @@
+Accion 1.1.23 Es
+
+Ambiente
+valor_unitario, cant_vendida, total, i, renglones: entero;
+
+Proceso
+
+REPETIR
+  Escribir("Ingrese la cantidad de reglones de desea ingresar: ");
+  Leer(renglones);
+  Si (renglones <=0) Entonces
+    Escribir("Error, la cantidad de renglones no puede ser menor o igual que 0, vuelva a ingresar un numero valido!!");
+  Hasta que(reglones<=0);
+
+PARA (i desde 1 hasta renglones) Hacer
+  Escribir("Ingrese el valor unitario del renglon ",i,": ");
+  Leer(valor_unitario);
+
+  Si (valor_unitario <= 0) Entonces
+    Escribir("ERROR, el valor unitario debe ser mayor que 0");
+  FinSi
+
+  Escribir("Ingrese la cantidad vendida del rengolon ",i,": ");
+  Leer(cant_vendida);
+
+  total:= valor_unitario * cant_vendida ;
+
+  Escribir("La cantidad por renglon es: ",renglon);
+
+FinPara
+
+FinAccion
+
+
+
+
