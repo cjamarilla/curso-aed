@@ -1,0 +1,20 @@
+Accion 1.1.25 Es
+
+Ambiente
+numero, numero2, suma, i: enteros;
+
+Proceso
+numero := 0;
+numero2 := 0;
+suma := 0;
+
+Escribir(numero," ", numero2," ");
+
+Para (i:=1 hasta 50) Hacer
+  suma := numero + numero2;
+  Escribir(suma," ");
+  numero := num2;
+  numero2 := suma;
+FinPara
+
+FinAccion
