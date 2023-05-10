@@ -1,0 +1,15 @@
+Accion 1.2.1 Es
+
+Ambiente
+numero:entero;
+
+Funcion Cuadrado(N:entero) : Entero
+  Cuadrado:= N*N;
+FinFuncion;
+
+Proceso
+Escribir("Ingrese un numero: ");
+Leer(numero);
+Escribir("El cuadrado de ese numero es: ",Cuadrado(nummero));
+
+FinAccion
