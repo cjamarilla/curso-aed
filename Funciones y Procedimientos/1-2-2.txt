@@ -1,0 +1,26 @@
+Accion 1.2.2 Es
+
+Ambiente
+numero: Entero;
+
+Funcion Suma_digitos(N:entero) : Entero
+
+Ambiente
+a,b,c :real;
+
+Proceso
+
+ a:= N DIV 100;
+ b:= (N MOD 100) DIV 10;
+ c:= N MOD 10;
+Suma_digitos:= a+b+c;
+
+FinFuncion
+
+Proceso
+Escribir("Ingrese un numero: ");
+Leer(numero);
+
+Suma_digitos(numero);
+
+FinAccion

@@ -1,0 +1,47 @@
+Accion 1.2.3 Es
+
+Ambiente
+numero, numero2, numero3:entero;
+bandera:boleano;
+opc:caracter;
+
+FUNCION valor_minimo(n, n2, n3:entero)  : Entero
+
+Ambiente 
+minimo:entero;
+
+Si (n>n2 y n2>n3) Entonces
+  minimo:=n3;
+  Sino
+      Si (n2>n3 y n3>n) Entonces
+        minimo:= n;
+        Sino 
+            minimo:=n2;
+      FinSi
+FinSi
+
+valor_minimo:=minimo;
+FinFuncion
+
+Proceso
+Repetir
+Escribir("Ingrese un numero: ");
+Leer(numero);
+Escribir("Ingrese un numero: ");
+Leer(numero2);
+Escribir("Ingrese un numero: ");
+Leer(numero3);
+
+Escribir("El menor de los numeros ingresados es: ",valor_minimo(numero,numero2,numero3));
+
+
+Escribir("Desea seguir ingresando numeros a comparar[S/N]: ");
+Leer(opc)
+
+Si(opc="S" o opc="s") Entonces
+    bandera:=Verdadero;
+FinSi
+
+Hasta que(bandera=falso);
+
+Fin Accion
