@@ -1,4 +1,33 @@
 Accion 1.1.24 Es
 
 Ambiente
-importe,
+importe, cuotas, impuesto, valor_cuota:enteros;
+continuar:boleano;
+
+Proceso
+  Mientras (continuar = Verdadero) Hacer
+    Escribir("Ingrese el importe: ");
+    Leer(importe);
+
+    Si(importe=9999) Entonces
+        continuar=falso;
+    FinSi
+
+  FinMientras
+
+    impuesto:= importe * 0.1;
+    Escribir("El impuesto es de: ",impuesto);
+
+    Si (importe > 500 y importe <= 1000) Entonces
+      cuotas:=2;
+      Sino 
+        Si (importe >1000) Entonces
+          cuotas:=3;
+            Sino
+              cuotas:=1;
+        FinSi
+    FinSi
+    valor_cuota:= (importe + impuesto) / cuotas;
+    Escribir("El importe se pagara en ",coutas," coutas de ",valor_cuota," cada una.");
+    
+FinAccion
