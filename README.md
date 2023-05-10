@@ -41,5 +41,5 @@
 - 1.1.35 []
 - 1.1.36 []
 
-|nombre | apellido | dni | edad |
-|ciro | amarilla | 39861384 | 26 |
+|nombre | apellido | dni      | edad |
+|ciro   | amarilla | 39861384 | 26   |
