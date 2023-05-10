@@ -41,16 +41,10 @@
 - 1.1.35 []
 - 1.1.36 []
 
-|nombre | apellido | dni      | edad |
-
-|-------|----------|----------|------|
-
-|ciro   | amarilla | 39861384 | 26   |
+| nombre | apellido | dni | edad |
+| :----- | -------: | ---: | :--: |
+| ciro   | amarilla | 39861384 | 26 |
 
 
 
-| Nombre | Edad | Ciudad de origen |
-| :---- | ----: | :-----: |
-| Juan | 25 | Buenos Aires |
-| María | 30 | Córdoba |
-| Pedro | 45 | Rosario |
+
