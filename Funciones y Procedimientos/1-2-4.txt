@@ -1,0 +1,50 @@
+Accion 1.2.4 Es
+
+Ambiente
+numero: Entero;
+
+FUNCION calcularClave(n:entero): Entero
+
+  Ambiente
+  suma,digito:Entero;
+
+  Proceso
+
+  Si (n<0) Entonces
+    claves:= -1;
+    Sino
+      resultado:=0;
+      Mientras(n>0) Hacer
+        digito:=n MOD 100;
+        suma:= suma + digito;
+        n:= n/10;
+      FinMientras
+      claves:= suma MOD 7;
+  FinSi 
+FinFuncion
+
+Procedimiento determinarClave() Es
+
+  Ambiente
+  n,clave:entero;
+  opc:caracter;
+  Repetir
+    Escribir("Ingrese un numero para determinar su clave: ");
+    Leer(n);
+    clave:=calcularClave(n);
+      Si(clave = -1) Entonces
+        Escribir("El numero es negativo");
+        Sino
+        Escribir("La clave para el numero es: ",clave);
+      FinSi
+      Escribir("Quiere continuar?[s/n]: ");
+      Leer(opc);
+  Hasta que(opcion ="S" o opcion= "s");
+FinProcedimiento
+
+Proceso
+determinarClave();
+finAccion
+
+      
+
