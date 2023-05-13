@@ -1,0 +1,19 @@
+Accion 2.1.4 ES
+
+Ambiente
+sec: secuencia de enteros;
+v: entero;
+cont:entero;
+
+Proceso
+ARR(sec);
+AVZ(sec,v);
+cont:=0;
+
+  Mientas NFDS (sec) Hacer
+    cont:=cont+1;
+    AVZ(sec,v);
+  FinMientras
+
+Escribir("La cantidad de socios es: ",cont);
+FinAccion

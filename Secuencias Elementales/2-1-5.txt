@@ -1,0 +1,24 @@
+Accion 2.1.5 ES
+
+Ambiente
+vieja,nueva:secuencia de enteros;
+s,cont:entero;
+
+Proceso
+ARR(vieja);
+AVZ(vieja,s);
+CREAR(nueva);
+cont:=0;
+
+Mientras NFDS(vieja) Hacer
+  Si (s > cont) Entonces
+    Escribir(nueva,cont);
+    cont:=cont+1;
+  FinSi 
+  cont:=cont+1;
+  AVZ(vieja,s);
+FinMientras
+Cerrar(nueva);
+Cerrar(vieja);
+
+FinAccion
