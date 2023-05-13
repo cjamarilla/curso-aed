@@ -1,0 +1,49 @@
+Accion 1.2.11 ES
+
+Ambiente
+opcion, continuidad, numero1, numero2:entero;
+
+Procedimiento Menu() ES
+
+Esc("***********MENU***********);
+Esc("1.Sumar);
+Esc("2.Restar);
+Esc("3.Multiplicar);
+Esc("4.Division);
+
+FinProcedimiento
+
+Funcion Sumar(n,n2:entero) : entero
+
+  Sumar:= n+ n2;
+
+FinFuncion
+
+Funcion Restar(n,n2:entero) : entero
+  Restar:= n- n2;
+FinFuncion
+
+Funcion Multiplicar(n,n2: entero) : entero
+  Multiplicar:= n*n2;
+FinFuncion
+
+Funcion Division(n,n2:entero) : entero
+  Division:= n DIV n2;
+FinFuncion
+
+Proceso   
+  Repetir
+    Esc("Ingrese un numero: "); Leer(numero);
+    Esc("Ingrese otro numero: "); Leer(numero2);
+    Menu();
+    Esc("Elija una opcion porfavor: "); Leer(opcion);
+      Segun(opcion) Hacer
+          1: Esc("El resultado de la suma es: ",Sumar(numero,numero2));
+          2: Esc("El resultado de la resta es: ",Restar(numero,numero2));
+          3: Esc("El resultado de la multiplicacion es: ",Multiplicar(numero,numero2));
+          4: Esc("El resultado de la Division es: ",Division(numero,numero2));
+      FinSegun
+      Esc("Desea Seguir ingresando numeros: [s/n]"); Leer(continuidad);
+  Hasta que(continuidad = "S" o continuidad ="s");
+
+FinAccion

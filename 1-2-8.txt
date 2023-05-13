@@ -1,0 +1,24 @@
+Accion 1.2.8 ES
+
+  Ambiente
+  x,y:enteros;
+
+  Procedimiento cambio_var(variable, variable2:enteros) ES
+
+  Ambiente
+  aux:entero;
+
+  aux:= variable;
+  variable:= variable2;
+  variable2:= aux;
+
+  FinProcedimiento;
+
+  Proceso 
+  Escribir("Ingrese un valor: "); Leer(x);
+  Escribir("Ingrese otro valor: "); Leer(y);
+  cambio_var(x,y);
+  Escribir("El nuevo valor es: ",x);
+  Escribir("El nuevo valor es: ",y);
+
+FinAccion
