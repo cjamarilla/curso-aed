@@ -1,0 +1,21 @@
+Accion 2.1.1 ES
+
+Ambiente
+sec:secuencia de caracter;
+v:caracter;
+cont:entero;
+
+Proceso
+ARR(sec);
+AVZ(sec,v);
+cont:=0;
+
+Mientras( v <> "*") Hacer
+    Si (v = "A")  ENTONCES
+      cont := cont + 1;
+    FinSi
+    AVZ(sec,v);
+FinMientras
+
+Esc("La cantidad de lentras A es: ",cont);
+FinAccion

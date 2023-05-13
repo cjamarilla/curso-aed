@@ -1,0 +1,22 @@
+Accion 2.1.2 ES
+
+Ambiente
+sec:secuencia de caracter;
+v: caracter;
+vocales={"a","e","i","o","u"};
+cont:entero;
+
+Proceso
+ARR(sec);
+AVZ(sec,v);
+cont:=0;
+
+Mientras(v <> "Z") Hacer
+  Si (v NO EN vocales) Entonces
+      cont:=cont+1;
+  FinSi
+  AVZ(sec,v);
+FinMientras
+
+Escribir("La cantidad de consonantes es : ",cont);
+FinAccion

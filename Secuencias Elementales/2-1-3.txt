@@ -1,0 +1,12 @@
+Accion 2.1.3 ES
+
+Ambiente
+sec,sec2: secuencia de caracter;
+v,c:caracter;
+
+Proceso
+ARR(sec);
+ARR(sec2);
+AVZ(sec,v);
+
+Mientras
