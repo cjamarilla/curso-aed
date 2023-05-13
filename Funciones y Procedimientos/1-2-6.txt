@@ -1,0 +1,28 @@
+Accion 1.2.6 ES
+
+  Ambiente
+  unidades,precio:entero;
+
+  Funcion descuento(u,p:Entero) Entero ES
+
+    Si(u>6) ENTONCES
+        descuento:= p * 0.04;
+        Sino
+            Si(u>12) ENTONCES
+              descuento:= p * 0.10;
+              Sino
+                descuento:= 0;
+            FinSi
+    FinSi
+  FinFuncion
+
+
+
+  Proceso
+  Escribir("Ingrese las unidades que desea comprar: ");
+  Leer(unidades);
+  Escribir("Ingrese el precio por unidad: ");
+  Leer(precio);
+  Escribir("El descuento que le corresponde es: ",descuento(unidades,precio));
+
+FinAccion
