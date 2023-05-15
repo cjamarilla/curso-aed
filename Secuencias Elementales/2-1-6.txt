@@ -1,0 +1,19 @@
+Accion 2.1.6 Es
+//preguntas
+Ambiente
+sec:secuencia de enteros
+v:entero;
+i, total, varones_mayores, varones_menores, mujeres_mayores, mujeres_menores:entero;
+porcentaje_varones_mayores, porcentaje_varones_menores, porcentaje_mujeres_mayores, porcentaje_mujeres_menores: real;
+
+
+Proceso
+ARR(sec);
+AVZ(sec,v); 
+varones_mayores:=0;
+varones_menores:=0;
+mujeres_mayores:=0;
+mujeres_menores:=0;
+
+  Para (i:=1 hasta 23) Hacer
+    Si ()
