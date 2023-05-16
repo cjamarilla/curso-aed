@@ -1,0 +1,63 @@
+Accion Flybondi Es
+
+Ambiente
+sec,salida2,salida3:secuencia de caracteres;
+v:caracter;
+cant_opiniones,cant_no_clientes,cant_valoracion_malas,i:enteros;
+clientes_registrados := { "0123456" }; //a modo de ejemplo
+
+Proceso
+ARR(sec);
+AVZ(sec,v);
+CREAR(salida2);
+CREAR(Salida3);
+cant_opiniones:=0;
+cant_valoracion_malas:=0;
+cant_no_clientes:=0;
+
+Mientras NFDS(sec) Hacer    
+  Mientras (v <>".") Hacer  
+    Para (i=1 hasta 10) Hacer
+          AVZ(sec,v);
+    FinPara
+    cant_opiniones:= cant_opiniones +1;
+    AVZ(sec,v);
+      Mientas(v <> "*") Hacer
+        Escribir(salida2,v);
+        AVZ(sec,v);
+        Si (v <> "") Entonces
+          Si (v NO EN clientes_registrados) Entonces
+            cant_no_clientes := cant_no_clientes + 1;
+          FinSi
+        FinSi
+      FinMientras
+      Mientras (v<> "#") Hacer
+        AVZ(sec,v);
+      FinMientras
+      Mientas(v <> "$") Hacer
+        Escribir(salida3,v);
+        AVZ(sec,v);
+      FinMientras
+      Escribir(salida3,"#");
+      AVZ(sec,v);
+      Si (v = "1") Entonces
+        cant_valoracion_malas:= cant_valoracion_malas +1;
+      FinSi
+      Escribir(salida2,"#");
+      Escribir(salida2,v);
+
+  FinMientras
+FinMientras
+
+Cerrar(sec);
+Cerrar(salida2);
+Cerrar(salida3);
+
+Escribir("Cantidad de opiniones registradas:", cant_opiniones);
+Escribir("Cantidad de clientes no registrados:", cant_no_clientes);
+Escribir("Cantidad de opiniones que dieron valoraciones malas:", cant_valoracion_malas);
+
+FinAccion
+
+
+/* Amarilla Ciro Joel -k1.6-23530 */
