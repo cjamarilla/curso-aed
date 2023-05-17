@@ -1,0 +1,26 @@
+Accion 2.1.7 Es
+
+ Ambiente
+    Empleados, Salida: Secuencia de Enteros;
+    Cuit: ENTERO;
+    Validos = (0, 1, 2, 3);
+
+PROCESO
+    ESCRIBIR ("Este algoritmo genera una secuencia nueva con los números de CUIT de los empleados que terminan en su documento con 0, 1, 2 y 3:");
+
+    ARR (Empleados);
+    CREAR (Salida);
+    AVZ(Empleados, Cuit);
+
+    MIENTRAS Cuit MOD 10 <> 0 HACER
+        SI ((Cuit MOD 100) DIV 10) EN Validos ENTONCES
+            Escribir(Salida, Cuit);
+        FinSi
+        AVZ(Empleados, Cuit);
+    FM
+
+    CERRAR(EMPLEADOS);
+    CERRAR(SALIDA);
+    Escribir("Nueva secuencia generada con éxito");
+
+FIN_Accion
