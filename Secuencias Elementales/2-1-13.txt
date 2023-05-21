@@ -1,0 +1,40 @@
+A partir del ejercicio anterior, determinar el porcentaje que representan las palabras que comienzan con "ALG" sobre todas las palabras de la secuencia.
+
+
+Accion 2.1.13 Es
+
+Ambiente
+sec:secuencia de caracteres;
+v:caracter;
+contador_requerido,contador_palabras:entero;
+
+Proceso
+ARR(sec);
+AVZ(sec,v);
+contador_requerido:=0;
+contador_palabras:=0;
+porcentaje:real;
+
+Mientras NFDS(sec) Hacer
+  Mientras (v=" ") Hacer
+    AVZ(sec,v);
+  FinMientras
+  contador_palabras:=contador_palabras+1;
+  Si(v ="A") Entonces
+      AVZ(sec,v);
+      Si(v ="L") Entonces
+        AVZ(sec,v);
+        Si(v ="G") Entonces
+          contador_requerido:=contador_requerido+1;
+          AVZ(sec,v);
+        FinSi
+      FinSi
+    FinSi
+  Mientras (NFDS(sec) y v <>" ") Hacer
+    Avz(sec,v);
+  FinMientras
+FinMientras
+
+porcentaje:= (contador_palabras DIV contador_requerido) *100;
+Escribir("La porcentaje de la palabras que comienza con ALG es de ",porcentaje,"%");
+CERRAR(sec);

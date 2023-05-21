@@ -1,0 +1,33 @@
+Dada una secuencia de caracteres, determinar la cantidad de palabras de 4 caracteres (letras).
+
+Accion 2.1.10 Es
+
+Ambiente
+sec:secuencia de caracteres;
+v:caracter;
+cont_palabra,cont_letra:entero;
+
+Proceso
+Escribir("Este algoritmo va a contar la cantidad de palabras que hay con 4 letras");
+ARR(sec);
+AVZ(sec,v);
+cont:=0;
+
+Mientras NFDS(sec) Hacer
+  cont_letra:=0;
+  Mientras(v=" ") Hacer
+    AVZ(sec,v);
+  FinMientras
+  Mientras (NFDS(sec) y v <> " ") Hacer
+    cont_letra:= cont_letra +1;
+    AVZ(sec,v);
+  FinMientras
+  Si (cont_letra = 4) Entonces
+    cont_palabra:= cont_palabra+1;
+  FinSi
+FinMientras
+
+Escribir("La cantidad de palabras con 4 letras que se encontraron son: ",cont_palabra);
+CERRAR(sec);
+
+FinAccion

@@ -1,0 +1,32 @@
+Se dispone de una secuencia de caracteres. Se desea permita contar la cantidad de palabras que comienzan con una letra dada.
+
+Accion 2.1.10 Es
+Ambiente
+sec:secuencia de caracteres;
+v,letra:v;
+cont:entero;
+
+Proceso
+Escribir("Ingrese la letra a contar: ");
+Leer(letra);
+
+ARR(sec);
+AVZ(sec,v);
+cont:=0;
+
+Mientras NFDS(sec) Hacer
+  Mientrar (v = " ")  Hacer
+    AVZ(sec,v);
+  FinMientras
+  Si(v = letra) Entonces
+    cont:= cont + 1;
+  FinSi
+  Mientras (v <> " " y NFDS(sec)) Hacer
+    AVZ(sec,v);
+  FinMientras
+FinMientras
+
+Escribir("La cantidad de palabras encontradas con la letra ",letra, "es :",cont);
+CERRAR(sec);
+
+FinAccion
