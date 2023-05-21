@@ -3,5 +3,60 @@
 Accion 2.1.8 Es
 
 Ambiente
+Empleados: Secuencia de enteros;
+Cuit, N_cuit,Valid, I: enteros;
+Salida: Secuencia de caracter;
+c: caracter;
+Validos = (0,1,2,3);
+Proceso
+Escribir("Este Algoritmo genera una secuencia con los cuit de empleados que terminan con 0,1,2,3 y transforma esa secuencia a caracter);
 
+ARR(Empleados);
+CREAR(Salida);
+AVZ(Empleados,Cuit);
+
+Mientras Cuit <> 0 Hacer
+  Si ((Cuit MOD 100)DIV 10) EN Validos  ENTONCES
+    Valid:= Cuit;
+    Para i:=1 Hasta 10 Hacer
+      N_cuit:= Valid DIV 10 **(11-I)
+        Segun (N_cuit) Hacer
+        0: c:="0";
+        1: c:="1";
+        2: c:="2";
+        3: c:="3";
+        4: c:="4";
+        5: c:="5";
+        6: c:="6";
+        7: c:="7";
+        8: c:="8";
+        9: c:="9";
+        FinSegun
+
+      Escribir(Salida, c);
+      Valid:= Valid DIV 10 **(11-I)
+    FinPara
+    
+    Segun(Valid) Hacer
+      0: c:="0";
+      1: c:="1";
+      2: c:="2";
+      3: c:="3";
+      4: c:="4";
+      5: c:="5";
+      6: c:="6";
+      7: c:="7";
+      8: c:="8";
+      9: c:="9";
+    FinSegun
+    Escribir(Salida, c);
+    Escribir(Salida, "-");
+  FinSi
+  AVZ(Empleados, Cuit);    
+FinMientras
+
+CERRAR(Empleados);
+CERRAR(Salida);
+
+FinAccion
 
