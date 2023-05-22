@@ -1,0 +1,40 @@
+Se desea saber la cantidad promedio de palabras que contienen las oraciones de una secuencia de caracteres. Supóngase que los puntos son siempre contiguos al último caracter de la palabra. La secuencia finaliza con una marca
+
+Accion 2.1.15 Es
+
+Ambiente
+sec: secuencia de caracter;
+v: caracter;
+promedio:real;
+cont_palabras,cont_oraciones:enteros;
+
+Proceso
+ARR(sec);
+AVZ(sec,v);
+cont_palabras:=0;
+cont_oraciones:=0;
+
+ Hola, ¿cómo estás?. Me gustaría invitarte a cenar. ¿A qué hora podemos encontrarnos?.,
+
+Mientras NFDS(sec) Hacer
+  cont_oraciones:= cont_oraciones+1;
+  Mientras (v<>".") Hacer
+    AVZ(sec,v);
+  FinMientras
+  Mientras NFDS(sec) y v(v<>".") Hacer
+    Mientra (v =",") Hacer
+      AVZ(sec,v);
+    FinMientras
+
+    Mientras NFDS(sec) y v(v<>".") Hacer
+      Mientra (v =" ") Hacer
+      AVZ(sec,v);
+      FinMientras
+      cont_palabras:= cont_palabras+1;
+
+      Mientras (v <> ",") y (v<>" ") Hacer
+      AVZ(sec,v);
+      FinMientras
+    FinMientras
+  FinMientras
+FinMientras
