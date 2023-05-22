@@ -14,7 +14,7 @@ AVZ(sec,v);
 cont_palabras:=0;
 cont_oraciones:=0;
 
- Hola, ¿cómo estás?. Me gustaría invitarte a cenar. ¿A qué hora podemos encontrarnos?.,
+// Hola, ¿cómo estás?. Me gustaría invitarte a cenar. ¿A qué hora podemos encontrarnos?.,
 
 Mientras NFDS(sec) Hacer
   cont_oraciones:= cont_oraciones+1;
@@ -38,3 +38,9 @@ Mientras NFDS(sec) Hacer
     FinMientras
   FinMientras
 FinMientras
+
+promedio:= cont_palabras div cont_oraciones;
+Escribir("La cantidad promedio de oraciones es:",promedio);
+CERRAR(sec);
+
+FinAccion
