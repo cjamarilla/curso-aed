@@ -1,0 +1,43 @@
+Se desea calcular el costo de un telegrama, que se determina en función del número de palabras (que vale V1 cada una), salvo que el promedio de letras por palabra supere las cinco letras, caso en que cada palabra vale V2.
+
+Accion 2.1.17 Es
+
+Ambiente
+sec:secuencia de caracteres;
+v:caracter;
+cont_palabras,cont_letras,v1,v2:enteros;
+promedio:real;
+
+Proceso
+Escribir("Ingrese el valor de cada palabra: ");
+Leer(v1);
+Escribir("Ingrese el valor de las palabras que superan las 5 letras: ");
+Leer(v2);
+ARR(sec);
+AVZ(sec,v);
+cont_palabras:=0;
+cont_letras:=0;
+
+Mientras NFDS(sec) Hacer
+  Mientras (v=" ") Hacer
+    AVZ(sec,v);
+  FinMientras
+  cont_palabras:= cont_palabras + 1;
+    Mientras (NFDS(sec) y v <> " ") Hacer
+      cont_letras := cont_letras +1 ;
+      AVZ(sec,v);
+    FinMientras
+    
+FinMientras
+
+  promedio:= cont_letras / cont_palabras;
+
+  Si (primedio > 5) Entonces
+    Escribir("El monto a cobrar es: ",cont_palabras * v2);
+    Sino
+      Escribir("El monto a cobrar es: ",cont_letras * v1);
+  FinSi
+
+  Cerrar(sec);
+
+FinAccion
