@@ -1,0 +1,78 @@
+Accion Mascotas Es
+
+  Ambiente
+  mascota = Registro
+    clave = Registro
+      Cuidad:N(4);
+      Raza:AN(10);
+      Nombre:AN(30);
+    FinRegistro
+  Color:AN(5);
+  Peso:N(3,2);
+  FinRegistro
+
+  Arch: archivo de mascotas ordenado por clave;
+  mas: mascota;
+  resg_cuidad:N(4);
+  resg_raza:AN(10);
+  total_cuidad,total_general,total_raza:N(4);
+  acumulador:Entero;
+
+  Procedimiento Corte_Raza Es   //Corte menos jerarquia
+    Corte_Cuidad();
+    Esc("Para la raza: ",resg_raza,"son: ",total_raza);
+    total_cuidad:= total_cuidad + total_raza;
+    total_raza:=0;
+    resg_raza: mas.clave.Raza;
+  FinProcedimiento
+
+
+  Procedimiento Corte_Cuidad Es   //Corte mayor jerarquia
+    Esc("Para la Cuidad: ",resg_cuidad, "son : ",total_cuidad);
+    total_general:= total_general + total_cuidad;
+    total_cuidad:= 0;
+    resg_cuidad:= mas.clave.Cuidad;
+  FinProcedimiento
+
+  
+
+  Procedimiento Tratar_Corte Es
+    Si (mas.clave.Cuidad <> resg_cuidad) Entonces
+      Corte_Cuidad();
+      Sino
+        Si (mas.clave.Raza <> resg_raza) Entonces
+          Corte_Raza();
+        FinSi
+    FinSi
+  FinProcedimiento
+
+  
+  Proceso
+  //Inicializacion de archivo
+  Abrir E/(Arch);
+  Leer(Arch,mas);
+  //Contadores y Acumuladores
+  total_cuidad:=0;
+  total_general:=0;
+  total_raza:=0;
+  acumulador:=0;
+  //Resguardos
+  resg_cuidad:=mas.Clave.Cuidad;
+  resg_raza:=mas.Clave.Raza;
+
+  Mientras NFDA(Arch) Hacer
+    Tratar_Corte();
+    Si(mas.Peso > 5) Entonces
+      acumulador:=acumulador+1;
+    FinSi
+    Leer(Arch,mas);
+  FinMientras
+
+  Corte_Cuidad();
+  Esc("El total es: ",total_general);
+  Esc("El total de mascotas que pesan mas de 5kg son: "acumulador);
+  Cerrar(Arch);
+FinAccion
+
+
+    
