@@ -10,7 +10,7 @@ Accion escenario3 Es
     Vistas:N(8);
   FinRegistro
 
-  Arch: archivo de Linkedin ordando por Origen, Tipo, Antig, Cuenta;
+  Arch: archivo de Linkedin ordando por Clave;
   Reg:Linkedin;
   Resg_Origen:N(6);
   Resg_Tipo:["1","2","3"];

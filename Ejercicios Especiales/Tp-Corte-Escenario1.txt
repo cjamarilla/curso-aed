@@ -2,7 +2,7 @@ Accion Escenario1 Es
 
 Ambiente
   Twitter= Registro
-    Reg= Registro
+    clave= Registro
     Region:N(4);
     SubRegion:N(3);
     Tipo:Caracter;
@@ -11,7 +11,7 @@ Ambiente
   Cantidad:N(8);
   FinRegistro
 
-  Archivo: archivo de twitter ordenado por Region, SubRegion, Tipo, Cuenta;
+  Archivo: archivo de twitter ordenado por clave;
   next: Twitter;
   Resg_Region:N(4);
   Resg_SubRegion:N(3);
