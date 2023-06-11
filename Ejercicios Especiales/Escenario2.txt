@@ -1,0 +1,71 @@
+Accion Escenario2 Es
+  Ambiente
+    Facebook= Registro Es
+      Clave= Registro Es
+        Pais:N(3);
+        Estado:N(15);
+        Momento:Caracter;
+        Usuario:N(7);
+      FinRegistro
+      Hasht:AN(140);
+      Top:Logico;
+    FinRegistro
+
+    Arch: Archivo de Facebook ordenado por Clave;
+    Reg: Facebook;
+    resg_Pais:N(3);
+    resg_Estado:AN(15);
+    cont_total,cont_pais,cont_estado:Enteros;
+
+    Procedimiento Corte_Estado Es
+      Esc("El estado es: ",resg_Estado,"y la cantidad ",cont_estado);
+      cont_pais:= cont_pais + cont_estado;
+      cont_estado:=0;
+      resg_Estado:= Reg.Clave.Estado;
+    FinProcedimiento
+
+    Procedimiento Corte_Pais Es
+      Corte_Estado();
+      Esc("El pais es: ",resg_Pais," y la cantidad es: ",cont_pais);
+      cont_total: cont_total + cont_pais;
+      cont_pais:=0;
+      resg_Pais:= Reg.Clave.Pais;
+    FinProcedimiento
+
+    Procedimiento Tratar_Corte Es
+      Si(Reg.Clave.Pais <> resg_Pais) Entonces
+        Corte_Pais();
+        Sino
+          Si(Reg.Clave.Estado <> resg_Estado) Entonces
+            Corte_Estado();
+          FinSi
+      FinSi
+    FinProcedimiento
+
+    Procedimiento Inicializar Es
+      Abrir E/(Arch);
+      Lerr(Arch,Reg);
+      cont_estado:=0;
+      cont_pais:=0;
+      cont_total:=0;
+      resg_Estado:= Reg.Clave.Estado;
+      resg_Pais:= Reg.Clave.Pais;
+    FinProcedimiento
+
+    Proceso
+    Inicializar();
+    Tratar_Corte();
+    Mientras  NFDA(Arch) Hacer
+      Si(Reg.Clave.Momento = "D") y (Reg.Top = "Falso") Entonces
+        cont_estado:= cont_estado + 1;
+      FinSi
+      Leer(Arch,Reg);
+    FinMientras
+
+    Corte_Pais();
+    Esc("El total general es: ",cont_total);
+    Esc("El total de cuenta que son diurnas y no top son: ",cont_estado);
+
+    Cerrar(Arch);
+
+    FinAccion

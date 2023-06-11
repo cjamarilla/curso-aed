@@ -63,6 +63,7 @@ Ambiente
   FinMientras
 
   Corte_Origen();
+  Esc("El total general es: "cont_Total);
   Esc("El numero de cuentas que supera las condiciones exijidas son : "cont_Tipo);
   Cerrar(Arch);
 

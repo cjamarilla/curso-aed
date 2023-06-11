@@ -1,0 +1,71 @@
+Accion Escenario 1 Es
+
+ Ambiente
+  Twitter=Registro Es
+    Clave= Registro Es
+      Region:N(4);
+      SubRegion:N(3);
+      Tipo:Caracter;
+      Cuenta:N(13);
+    FinRegistro
+    Cantidad:N(8);
+  FinRegistro
+
+  Arch: Archivo de Twitter y ordenado por Clave;
+  Reg: Twitter;
+  resg_Region:N(4);
+  resg_SubRegion:N(3);
+  general_total, cont_region, cont_subregion:Enteros;
+
+  Procedimiento Corte_SubRegion Es
+    Esc("La Subregion : ",resg_Region,"hay ",cont_subregion);
+    cont_region:=cont_region+cont_subregion;
+    cont_subregion:=0;
+    resg_SubRegion:= Reg.Clave.SubRegion;
+  FinProcedimiento
+
+  Procedimiento Corte_Region Es
+    Corte_SubRegion();
+    Esc("La Region: ",resg_Region, "Hay ", cont_region);
+    general_total:= general_total + cont_region;
+    cont_region:=0;
+    resg_Region:= Reg.Clave.Region;
+  FinProcedimiento
+
+  Procedimiento Tratar_Corte Es
+    Si(Reg.Clave.Region <> resg_Region) Entonces
+      Corte_Region();
+      Sino
+        Si(Reg.Clave.SubRegion <> resg_SubRegion) Entonces
+          Corte_SubRegion();
+        FinSi
+    FinSi
+  FinProcedimiento
+
+  Procedimiento Inicializar Es
+    Abrir E/ (Arch);
+    Leer(Arch,Reg);
+    general_total:=0;
+    cont_region:=0;
+    cont_subregion:=0;
+    resg_Region:= Reg.Clave.Region;
+    resg_SubRegion:= Reg.Clave.SubRegion;
+  FinProcedimiento
+
+  Proceso
+  Inicializar();
+  Tratar_Corte();
+  Mientras NFDA(Arch) Hacer
+    Si(Reg.Clave.Tipo = "L") y (Reg.Cantidad < 15000) Hacer
+      cont_subregion:= cont_subregion + 1;
+    FinSi
+    Leer(Arch,Reg);
+  FinMientras
+
+  Corte_Region();
+  Esc("El total general es: ",general_total);
+  Esc("La cantidad de cuentas del tipo leve y no supera los 15000 son: cont_subregion);
+  Cerrar(Arch);
+
+FinAccion
+  
