@@ -1,0 +1,71 @@
+Accion Escenario3 Es
+
+Ambiente
+  Linkedin=Registro es
+     Clave=Registro es
+      Origen:N(6);
+      Tipo:["1","2","3"];
+      Antig:N(3);
+      Cuenta:N(13);
+    FinRegistro
+    Vistas:N(8);
+  FinRegistro
+
+  Arch: Archivo de Linkedin ordenado por Clave;
+  Reg: Linkedin;
+  R_Origen:N(6);
+  R_Tipo:["1","2","3"];
+  cont_Origen,cont_Tipo,cont_Total:Enteros;
+
+  Procedimiento Corte_Tipo Es
+    Esc("El tipo es: ",R_Tipo,"y la cantidad: ",cont_Tipo);
+    R_Origen:=R_Origen + R_Tipo;
+    R_Tipo:=0;
+    R_Tipo:= Reg.Clave.Tipo;
+  FinProcedimiento
+
+  Procedimiento Corte_Origen Es
+    Corte_Tipo();
+    Esc("El origen es: ",R_Origen,"y la cantidad: ",cont_Origen);
+    cont_Total:=cont_Total+cont_Origen;
+    cont_Origen:=0;
+    R_Origen:=Reg.Clave.Origen;
+  FinProcedimiento
+
+  Procedimiento Tratar_Corte Es
+    Si(Reg.Clave.Origen <> R_Origen) Entonces
+      Corte_Origen();
+      Sino
+        Si(Reg.Clave.Tipo <> R_Tipo) Entonces
+          Corte_Tipo();
+        FinSi
+    FinSi
+  FinProcedimiento
+
+  Procedimiento Inicializar Es
+    Abrir E/(Arch);
+    Leer(Arch,Reg);
+    cont_Origen:=0;
+    cont_Tipo:=0;
+    cont_Total:=0;
+    R_Origen:=Reg.Clave.Origen;
+    R_Tipo:=Reg.Clave.Tipo;
+  FinProcedimiento
+
+  Proceso
+  Inicializar();
+  Tratar_Corte();
+  Mientras NFDA(Arch) Hacer
+    Si (Reg.Vistas > 1000) y (Reg.Clave.Antig < 5) Entonces
+      cont_Tipo:= cont_Tipo + 1;
+    FinSi
+    Leer(Arch,Reg);
+  FinMientras
+
+  Corte_Origen();
+  Esc("El numero de cuentas que supera las condiciones exijidas son : "cont_Tipo);
+  Cerrar(Arch);
+
+  FinAccion
+
+
