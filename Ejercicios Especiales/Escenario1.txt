@@ -54,8 +54,8 @@ Accion Escenario 1 Es
 
   Proceso
   Inicializar();
-  Tratar_Corte();
   Mientras NFDA(Arch) Hacer
+    Tratar_Corte();
     Si(Reg.Clave.Tipo = "L") y (Reg.Cantidad < 15000) Hacer
       cont_subregion:= cont_subregion + 1;
     FinSi

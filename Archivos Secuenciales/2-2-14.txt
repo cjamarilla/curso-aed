@@ -53,8 +53,8 @@ Accion 2.2.14 Es
 
   Proceso
   Inicializar();
-  Tratar_Corte();
   Mientras NFDA(Arch) Hacer
+    Tratar_Corte();
     Si(reg.Condicion_Vivienda = "Muy Buena") Entonces
       cont_manzana:= cont_manzana + Reg.Cantidad_Habitantes;
     FinSi

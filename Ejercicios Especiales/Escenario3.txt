@@ -54,8 +54,8 @@ Ambiente
 
   Proceso
   Inicializar();
-  Tratar_Corte();
   Mientras NFDA(Arch) Hacer
+    Tratar_Corte();
     Si (Reg.Vistas > 1000) y (Reg.Clave.Antig < 5) Entonces
       cont_Tipo:= cont_Tipo + 1;
     FinSi

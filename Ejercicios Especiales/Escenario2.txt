@@ -54,8 +54,8 @@ Accion Escenario2 Es
 
     Proceso
     Inicializar();
-    Tratar_Corte();
     Mientras  NFDA(Arch) Hacer
+      Tratar_Corte();
       Si(Reg.Clave.Momento = "D") y (Reg.Top = "Falso") Entonces
         cont_estado:= cont_estado + 1;
       FinSi

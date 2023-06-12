@@ -1,0 +1,81 @@
+Accion 2.2.11 Es
+
+  Ambiente
+    Fecha=Registro es
+      aaaa:N(4);
+      mm:N(2);
+      dd:N(2);
+    FinRegistro
+
+    Utn = Registro es
+      Clave= Registro es
+        Sexo:AN(10);
+        Carrera:AN(10);
+        Nro_Legajo:N(5);
+      FinRegistro
+      Fecha_Ingreso: Fecha;
+      Total_Materias_Aprobadas:N(2);
+    FinRegistro
+
+    Arch: archivo de Utn ordenado por clave;
+    sig: Utn;
+    resg_sexo:AN(10);
+    resg_carrera:AN(10);
+    acu_sexo,acu_carrera,acu_total,acu_extra:entero;
+
+    Procedimiento Corte_Carrera Es
+      Esc("En la carrera ",resg_carrera,"Hay :",acu_carrera);
+      acu_sexo:= acu_sexo + acu_carrera;
+      acu_carrera:=0;
+      resg_carrera:= sig.Clave.Carrera;
+    FinProcedimiento
+
+    Procedimiento Corte_Sexo Es
+      Corte_Carrera();
+      Esc("Del sexo "),resg_sexo,("Hay : "),acu_sexo;
+      acu_total:=acu_total+acu_sexo;
+      acu_sexo:=0;
+      resg_sexo:= sig.Clave.Sexo;
+    FinProcedimiento
+
+    Procedimiento Tratar_Corte Es
+      Si(sig.Clave.Sexo <> resg_sexo) Entonces
+        Corte_Sexo();
+        Sino
+          Si(sig.Clave.Carrera <> resg_carrera) Entonces
+            Corte_Carrera();
+          FinSi
+      FinSi
+    FinProcedimiento
+
+    Procedimiento Inicializar Es
+      Abrir E/(Arch);
+      Leer(Arch,sig);
+      acu_carrera:=0;
+      acu_extra:=0;
+      acu_sexo:=0;
+      acu_total:=0;
+      resg_carrera:= sig.Clave.Carrera;
+      resg_sexo:= sig.Clave.Sexo;
+    FinProcedimiento
+
+    Proceso
+    Inicializar();
+    Mientras NFDA(Arch) Hacer
+      Tratar_Corte();
+      Si (sig.Fecha_Ingreso.aaaa = 2009) y (sig.Total_Materias_Aprobadas > 20) Entonces
+          acu_carrera := acu_carrera +1;
+      FinSi
+      Si (sig.Fecha_Ingreso.aaaa = 2009) y (sig.Total_Materias_Aprobadas < 20) Entonces
+          acu_extra := acu_extra +1;
+      FinSi
+      Leer(Arch,sig);
+    FinMientras
+
+    Corte_Sexo();
+    Esc("El total es: ",acu_total);
+    Esc("La cantidad de alumnos que ingresaron en 2009 y aprobaron mas de 20 materias son: ",acu_carrera);
+    Esc("La cantidad de alumnos que ingresaron en 2009 y aprobaron menos de 20 materias son: ",acu_extra);
+    Cerrar(Arch);
+    
+FinAccion
