@@ -1,0 +1,76 @@
+Accion 2.2.12 Es
+
+  Ambiente
+    Poblacion= Registro es
+      Clave= Registro es
+        Provincia:AN(60);
+        Departamento:AN(60);
+        Cuidad:AN(60);
+        Barrio:AN(60);
+        Id_Casa:AN(10);
+      FinRegistro
+      Cantidad_Habitantes:N(10);
+    FinRegistro
+
+    Exit= Registro es
+      Provincia:AN(60);
+      Departamento:AN(60);
+      Cantidad_Habitantes:N(10);
+    FinRegistro
+
+    Entrada: Archivo de poblacion ordenado por Clave;
+    Ent: Poblacion;
+    Salida: Archivo de Exit;
+    Sal: Exit;
+    acu_depto,acu_total: entero;
+    resg_prov:AN(60);
+    resg_dept:AN(60);
+
+    Procedimiento Corte_Depto Es
+      Sal.Cantidad_Habitantes := acu_depto;
+      Sal.Provincia:= resg_prov;
+      Sal.Departamento:= resg_dept;
+      Grabar(Salida,Sal);
+      acu_total:= acu_total + acu_depto
+      acu_depto:=0;
+      resg_dept:= Ent.Clave.Departamento;
+    FinProcedimiento
+
+    Procedimiento Corte_Provincia Es
+      Corte_Depto();
+      resg_prov:= Ent.Clave.Provincia;
+    FinProcedimiento
+
+    Procedimiento Tratar_Corte Es
+      Si( Ent.Clave.Provincia <> resg_prov) Entonces
+        Corte_Provincia();
+        Sino
+          Si( Ent.Clave.Departamento <> resg_dept) Entonces
+            Corte_Depto();
+          FinSi
+      FinSi
+    FinProcedimiento
+
+    Proceso
+    Abrir E/(Entrada);
+    Abrir /S(Salida);
+    Leer(Entrada,Ent);
+    acu_depto:=0;
+    acu_total:=0;
+    resg_dept:= Ent.Departamento;
+    resg_prov:= Ent.Provincia;
+
+    Mientras NFDA(Entrada) Hacer
+      Tratar_Corte();
+      acu_depto:= acu_depto + Ent.Cantidad_Habitantes;
+      Leer(Entrada,Ent);
+    FinMientras
+
+    Corte_Provincia();
+    Esc("El total de habitantes es: ",acu_total);
+    Cerrar(Entrada);
+    Cerrar(Salida);
+FinAccion
+    
+
+

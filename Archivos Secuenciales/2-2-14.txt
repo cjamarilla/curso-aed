@@ -1,0 +1,73 @@
+Accion 2.2.14 Es
+
+  Ambiente
+  Censo= Registro es
+    Clave= Registro es
+      Radio:N(10);
+      Manzana:AN(10);
+      Nro_Vivienda:N(10);
+    FinRegistro
+    Condicion_Vivienda:{"Muy Buena", "Buena", "Mala"};
+    Cantidad_Habitantes:N[10];
+  FinRegistro
+
+  Arch: Archivo de Censo ordenado por Clave;
+  Reg:Censo;
+  resg_Radio:N(10);
+  resg_Manzana:AN(10);
+  cont_total,cont_radio,cont_manzana:entero;
+
+  Procedimiento Corte_Manzana Es
+    Esc("La Manzana ",resg_Manzana,"hay :",cont_manzana);
+    cont_radio:= cont_radio + cont_manzana;
+    cont_manzana:=0;
+    resg_Manzana:= Reg.Clave.Manzana;
+  FinProcedimiento
+
+  Procedimiento Corte_Radio Es
+    Esc("En el radio ",resg_Radio,"hay : ",cont_radio);
+    cont_total:=cont_total + cont_radio;
+    cont_radio:=0;
+    resg_Radio:= Reg.Clave.Radio;
+  FinProcedimiento
+
+  Procedimiento Tratar_Corte Es
+    Si(Reg.Clave.Radio <> resg_Radio) Entonces
+      Corte_Radio();
+      Sino
+        Si(Reg.Clave.Manzana <> resg_Manzana) Entonces
+          Corte_Manzana();
+        FinSi
+    FinSi
+  FinProcedimiento
+
+  Procedimiento Inicializar Es
+    Abrir E/(Arch);
+    Leer(Arch,Reg);
+    cont_manzana:=0;
+    cont_radio:=0;
+    cont_total:=0;
+    resg_Manzana:= Reg.Clave.Manzana;
+    resg_Radio:=  Reg.Clave.Radio;
+  FinProcedimiento
+
+  Proceso
+  Inicializar();
+  Tratar_Corte();
+  Mientras NFDA(Arch) Hacer
+    Si(reg.Condicion_Vivienda = "Muy Buena") Entonces
+      cont_manzana:= cont_manzana + Reg.Cantidad_Habitantes;
+    FinSi
+    Leer(Arch,Reg);
+  FinMientras
+
+  Corte_Radio();
+  Esc("La cantidad total de habitantes es: ",cont_total);
+  Esc("La cantidad de habitantes con viviendas muy buenas es: ",cont_manzana);
+  Cerrar(Arch);
+FinAccion
+
+
+
+
+    
