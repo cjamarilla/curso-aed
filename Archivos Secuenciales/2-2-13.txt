@@ -1,0 +1,124 @@
+Accion 2.2.13 Es
+
+  Ambiente
+    Fecha = Registro es
+      aaaa:N(4);
+      mm:N(2);
+      dd:N(2);
+    FinRegistro
+
+    Reparaciones= Registro es
+      Clave= Registro es
+        Cod_Sucursal:N(10);
+        Marca:AN(10);
+        Modelo:AN(10);
+        Cod_Tragamonedas:AN(10);
+      FinRegistro
+      Fecha_Reparacion: Fecha;
+      Costo_Reparacion: N(10);
+    FinRegistro
+
+    Casino: Archivo de Reparaciones ordenado por clave;
+    Reg: Reparaciones;
+    resg_sucursal:N(10);
+    resg_marca:AN(10);
+    resg_modelo:AN(10);
+    resg_tragamonedas:AN(10);
+    costo_sucursal,costo_marca,costo_modelo,costo_tragamonedas,costo_total,repa_sucursal,repa_marca,repa_modelo,repa_tragamonedas,total_repa:entero;
+
+    Procedimiento Corte_Tragamonedas Es
+      Esc("La cantidad de reparaciones del tragamonedas ",resg_tragamonedas,"es :",repa_tragamonedas);
+      Esc("Y su costo es de: ",costo_tragamonedas);
+      repa_modelo := repa_modelo + repa_tragamonedas;
+      costo_modelo:= costo_modelo + costo_tragamonedas;
+      repa_tragamonedas:=0;
+      costo_tragamonedas:=0;
+      resg_tragamonedas:= Reg.Clave.Cod_Tragamonedas;
+    FinProcedimiento
+
+    Procedimiento Corte_Modelo Es
+      Corte_Tragamonedas();
+      Esc("La cantidad de reparaciones del tragamonedas modelo ",resg_modelo,"es :",repa_modelo);
+      Esc("Y su costo es de : ",costo_modelo);
+      repa_marca:= repa_marca + repa_modelo;
+      costo_marca:= costo_marca + costo_modelo;
+      repa_modelo:=0;
+      costo_modelo:=0;
+      resg_modelo:= Reg.Clave.Modelo;
+    FinProcedimiento
+
+    Procedimiento Corte_Marca Es
+      Corte_Modelo();
+      Esc("La cantidad de reparaciones de la marca ",resg_marca," Es : ",repa_marca);
+      Esc("Y el costo es de : ",costo_marca);
+      repa_sucursal := repa_sucursal + repa_marca;
+      costo_sucursal:= costo_sucursal + costo_marca;
+      repa_marca:=0;
+      costo_marca:=0;
+      repa_sucursal:= Reg.Clave.Cod_Sucursal;
+    FinProcedimiento
+
+    Procedimiento Corte_Sucursal Es
+      Corte_Marca();
+      Esc("La cantidad de reparaciones de la sucursal ",resg_sucursal,"Es de : ",repa_sucursal);
+      Esc("Y su costo es de :",costo_sucursal);
+      total_repa:=total_repa + repa_sucursal;
+      costo_total:= costo_total +  costo_sucursal;
+      repa_sucursal:=0;
+      costo_sucursal:=0;
+      resg_sucursal:= Reg.Clave.Cod_Sucursal;
+    FinProcedimiento
+
+    Procedimiento Tratar_Corte Es
+      Si(Reg.Clave.Cod_Sucursal <> resg_sucursal) Entonces
+        Corte_Sucursal();
+        Sino
+          Si(Reg.Clave.Marca <> resg_marca) Entonces
+            Corte_Marca();
+            Sino
+              Si(Reg.Clave.Modelo <> resg_modelo) Entonces
+                Corte_Modelo();
+                Sino
+                  Si(Reg.Clave.Cod_Tragamonedas <> resg_tragamonedas) Entonces
+                    Corte_Tragamonedas();
+                  FinSi
+              FinSi
+          FinSi
+      FinSi
+    FinProcedimiento
+
+    Procedimiento Inicializar Es
+      Abrir E/(Casino);
+      Leer(Casino,Reg);
+      costo_sucursal:=0;
+      costo_marca:=0;
+      costo_modelo:=0;
+      costo_tragamoneda:=0;
+      costo_total:=0;
+      repa_sucursal:=0;
+      repa_marca:=0;
+      repa_modelo:=0;
+      repa_tragamonedas:=0;
+      total_repa:=0;
+      resg_tragamonedas:= Reg.Clave.Cod_Tragamonedas;
+      resg_modelo:= Reg.Clave.Modelo;
+      resg_marca:= Reg.Clave.Marca;
+      resg_sucursal:= Reg.Clave.Cod_Sucursal;
+    FinProcedimiento
+
+    Proceso
+    Inicializar();
+    Mientras NFDA(Casino) Hacer
+      Tratar_Corte();
+      repa_tragamonedas:= repa_tragamonedas +1;
+      costo_tragamoneda := costo_tragamoneda + Reg.Costo_Reparacion;
+      Leer(Casino,Reg);
+    FinMientras
+
+    Corte_Sucursal();
+    Esc("El total general de reparaciones es: ",total_repa);
+    Esc("El total general de gastos es: ",costo_total);
+    Cerrar(Casino);
+FinAccion
+      
+      
