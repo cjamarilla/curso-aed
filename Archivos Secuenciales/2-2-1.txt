@@ -17,7 +17,7 @@ Accion 2.2.1 Es
       Ultimo_Examen_Aprobado:Fecha;
       Nota:N(2);
     FinRegistro
-
+    
     Utn: Archivo de facultad;
     leg: Facultad;
     

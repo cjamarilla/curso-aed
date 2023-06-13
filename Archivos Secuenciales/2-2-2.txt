@@ -1,0 +1,43 @@
+Accion 2.2.2 Es
+  Ambiente
+    Fecha= Registro Es
+      dd:N(2);
+      mm:N(2);
+      aaaa:N(4);
+    FinRegistro
+
+    Registro= Registro Es
+      N_Factura:N(10);
+      fecha: Fecha;
+      Total:N(10);
+    FinRegistro
+
+    Arch: Archivo de Registro;
+    reg: Registro;
+    fecha_usuario: Fecha;
+    
+
+    Proceso
+    Esc("Ingrese un dia: ");
+    Leer(fecha_usuario.dd);
+    Esc("Ingrese un mes: ");
+    Leer(fecha_usuario.mm);
+    Esc("Ingrese un anio: ");
+    Leer(fecha_usuario.aaaa);
+    Abrir E/(Arch);
+    Leer(Arch,reg);
+    Mientras NFDA(Arch) Hacer
+      Si(reg.fecha > fecha_usuario) Entonces 
+        Si (reg.Total < 1000) Entonces
+          Esc("El numero de factura es: ",reg.N_Factura);
+          Esc("la fecha es: ",reg.fecha.dd,"/","reg.fecha.mm,"/",reg.fecha.aaaa);
+          Esc("El total es de : ",reg.Total);
+        FinSi
+      FinSi
+      Leer(Arch,reg);
+    FinMientras
+    Cerrar(Arch);
+FinAccion
+
+
+    

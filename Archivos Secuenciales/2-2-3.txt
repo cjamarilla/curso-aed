@@ -1,0 +1,27 @@
+Accion 2.2.3 Es
+  Ambiente
+    Biblioteca = Registro es
+      N_Socio:N(10);
+      N_Telefono:N(10);
+      ApellidoyNombre:AN(20);
+      Carrera:{"ISI","LAR,"IQ","IEM"};
+      Domicilio:AN(30);
+      Cant_Prestadas:N(2);
+    FinRegistro
+
+    Arch: Archivo Biblioteca;
+    reg: Biblioteca;
+    Arch_salida: Archivo Biblioteca;
+
+    Proceso
+    Abrir E/(Arch);
+    Leer(Arch,reg);
+    Abrir /S(Arch_salida)
+    Mientras NFDA(Arch) Hacer
+      Si(reg.Carrera= "ISI") y (reg.Cant_Prestadas > 4) Entonces
+          Grabar(Arch_salida,reg);
+      FinSi
+      Leer(Arch,Reg);
+    FinMientras
+    Cerrar(Arch);
+FinAccion
