@@ -1,0 +1,36 @@
+Accion 2.2.1 Es
+  Ambiente
+    Fecha= Registro es
+      dd:N(2);
+      mm:N(2);
+      aaaa:N(4);
+    FinRegistro
+
+    Facultad= Registro es
+      ApellidoyNombre:AN(20);
+      Carrera:{"ISI","IQ","IEM","IQ"};
+      Legajo: N(5);
+      Nacimiento: Fecha;
+      Ingreso:Fecha;
+      Dni:N(8);
+      Sexo:{"M","F"};
+      Ultimo_Examen_Aprobado:Fecha;
+      Nota:N(2);
+    FinRegistro
+
+    Utn: Archivo de facultad;
+    leg: Facultad;
+    
+    Proceso
+    Abrir E/(Utn);
+    Leer(Utn,leg);
+    Mientras NFDA (Utn) Hacer
+      Esc("Numero de legajo es: ",leg.legajo);
+      Esc("Apellido y nombre: ",leg.ApellidoyNombre);
+      Esc("Numero de Dni: ",leg.Dni);
+      Esc("Carrera es : ",leg.Carrera);
+      Leer(Utn,leg);
+    FinMientras
+
+    Cerrar(Utn);
+FinAccion
