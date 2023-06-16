@@ -1,0 +1,57 @@
+Accion 2.2.6 Es
+
+  Ambiente
+    Graduados = Registro  Es
+      ApellidoyNombre:AN(20);
+      Promedio:N(2);
+    FinRegistro
+
+
+    Arch: Archivo de Graduados;
+    Reg: Graduados;
+    
+
+    c7,c8,c9,c10,cont,suma: Entero;
+    promedio:real;
+    recomendacion:AN;
+
+    Proceso
+    Abrir E/(Arch);
+    Leer(Arch, Reg);
+    c7:=0;
+    c8:=0;
+    c9:=0;
+    c10:=0;
+    suma:=0;
+    cont:=0;
+    Mientras NFDA(Arch) Hacer
+      Segun (Reg.Promedio) Hacer
+        <7: 
+        recomendacion:="NO";
+        c7:= c7 +1 ;
+        <8:
+        recomendacion:="SI";
+        c8:= c8+1;
+        <9:
+        recomendacion:="F";
+        c9:=c9 + 1;
+        >9:
+        recomendacion="MF";
+        c10:= c10 + 1;
+      FinSegun
+      cont:=cont+1;
+      suma:= suma + Reg.Promedio;
+      Esc("Nombre y Apellido: ",Reg.ApellidoyNombre);
+      Esc("Promedio: ",Reg.Promedio);
+      Esc("Resultado de Recomendacion: ",recomendacion);
+      Leer(Arch,Reg);
+    FinMientras
+
+    promedio:= suma / cont;
+    Esc("El total de de graduados con promedio menor a 7: ",c7);
+    Esc("El total de de graduados con promedio menor a 8: ",c8);
+    Esc("El total de de graduados con promedio menor a 9: ",c9);
+    Esc("El total de de graduados con promedio mayor a 9: ",c10);
+    Esc("El promedio general es de: ",promedio);
+    Cerrar(Arch);
+FinAccion

@@ -1,0 +1,57 @@
+Accion 2.2.8 Es
+
+  Ambiente
+
+    Fecha =  Registro es 
+      dd: 1..31;
+      mm: 1..12;
+      aaaa:N(4);
+    FinRegistro
+
+    Compras = Registro es
+      Nro_Cliente:N(10);
+      Fecha_Ultima_Compra: Fecha;
+      Monto:N(10);
+    FinRegistro
+
+    Cliente = Registro es
+      Nro_Cliente:N(10);
+      ApellidoyNombre:AN(20);
+      Domicilio:AN(30);
+      Telefono:N(12);
+      Dni:N(8);
+    FinRegistro
+
+    Arch_Compras: Archivo de Compras ordenado por Nro_Cliente;
+    Reg: Compras;
+    Arch_Cliente: Archivo de Cliente ordenado por Nro_Cliente;
+    lot: Cliente;
+    reg_fecha: Fecha;
+    monto:entero;
+
+    Proceso
+    Esc("A continuacion debe ingresar una fecha");
+    Esc("Ingrese el dia: "); Leer(reg_fecha.dd);
+    Esc("Ingrese el mes: "); Leer(reg_fecha.mm);
+    Esc("Ingrese el año: "); Leer(reg_fecha.aaaa);
+    Esc("Ingrese el monto: "); Leer(monto);
+    Abrir E/(Arch);
+    Leer(Arch,Reg);
+    Abrir E/(Arch_Cliente);
+    Leer(Arch_Cliente,lot);
+    Mientras NFDA(Arch) Hacer
+      Mientras (Reg.Nro_Cliente <> lot.Nro_Cliente) Hacer
+        Leer(Arch_Cliente,lot);
+        Si (Reg.Fecha_Ultima_Compra > reg_fecha) Entonces
+          Si(Monto > Reg.Monto) Entonces
+            Esc("El nombre del cliente es: ",lot.ApellidoyNombre);
+            Esc("La fecha de la ultima compra fue: ",Reg.Fecha_Ultima_Compra.dd,"/",Reg.Fecha_Ultima_Compra.mm,"/",Reg.Fecha_Ultima_Compra.aaaa);
+            Esc("El monto fue :",Reg.Monto);
+          FinSi
+        FinSi
+        Leer(Arch,Reg);
+        Leer(Arch_Cliente,lot);
+      FinMientras
+    Cerrar(Arch);
+    Cerrar(Arch_Cliente);
+FinAccion
