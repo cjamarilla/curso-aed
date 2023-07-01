@@ -60,7 +60,6 @@ Accion 2.2.14 Es
     FinSi
     Leer(Arch,Reg);
   FinMientras
-
   Corte_Radio();
   Esc("La cantidad total de habitantes es: ",cont_total);
   Esc("La cantidad de habitantes con viviendas muy buenas es: ",cont_manzana);
