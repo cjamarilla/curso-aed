@@ -1,0 +1,54 @@
+Accion 2.2.7 Es
+  Ambiente
+    Padron = Registro Es
+      NombreyApellido:AN(20);
+      Clase:N(2);
+      DNI:N(8);
+      Direccion:AN(20);
+      N_Mesa:N(4);
+      Observaciones:AN(100);
+      N_Circuito:N(4);
+      Partido: 0...3;
+    FinRegistro
+
+    Arch: Archivo de Padron;
+    Reg: Padron;
+
+    Salida= Registro Es
+      NombreyApellido:AN(20);
+      Dni:N(8);
+      Direccion:AN(20);
+    FinRegitro
+
+    Exit, Exit2: Archivo de Salida;
+    next,nx: Salida;
+
+    Proceso
+    Abrir E/(Arch);
+    Abrir /S(Exit);
+    Abrir /S(Exit2);
+    Leer(Arch,Reg);
+
+    Mientras NFDA(Arch) Hacer
+      Si(Reg.Partido = 3) Entonces
+        Reg.NombreyApellido := next.NombreyApellido;
+        Reg.DNI := next:Dni;
+        Reg.Direccion := next.Direccion;
+        Escribir(Exit,next);
+        
+        Sino
+          Si(Reg.Partido= 0) y (Reg.Clase > 1940) Entonces
+            Reg.NombreyApellido := nx.NombreyApellido;
+            Reg.DNI := nx:Dni;
+            Reg.Direccion := nx.Direccion;
+            Escribir(Exit2,nx);
+          FinSi
+      FinSi
+      Leer(Arch,Reg);
+    FinMientras
+    Cerrar(Arch);
+    Cerrar(Exit);
+    Cerrar(Exit2);
+FinAccion
+
+

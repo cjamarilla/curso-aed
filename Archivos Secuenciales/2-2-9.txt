@@ -1,0 +1,48 @@
+Accion 2.2.9 Es
+
+  Ambiente
+  Productos = Registro Es
+    Cod_Producto:N(5);
+    Tipo: 1..3;
+    Marca:AN(10);
+    Modelo:AN(10);
+    Descripcion:AN(50);
+    Cantidad:N;
+    Precio:N(1000);
+  FinRegistro
+
+  Arch_E,Arch_S: Archivo de Productos;
+  reg_e,reg_s: Productos;
+  t_general,t_uno,t_dos,t_tres:entero;
+
+  Proceso
+  Abrir E/(Arch_E);
+  Leeer(Arch_E,reg_e);
+  Abrir /S(Arch_S);
+    Mientras NFDA(Arch_E) Hacer
+      Segun (reg_e.Tipo) Hacer
+        1:
+          reg_s.Precio:= reg_e.Precio;
+          reg_s.Precio := reg_s.Precio +((reg_s.Precio * 10)/100);
+          t_uno:= t_uno + 1;
+        2:
+          reg_s.Precio:= reg_e.Precio;
+          reg_s.Precio := reg_s.Precio +((reg_s.Precio * 25)/100);
+          t_dos:= t_dos + 1;
+        3:
+          reg_s.Precio:= reg_e.Precio;
+          reg_s.Precio := reg_s.Precio +((reg_s.Precio * 50)/100);
+          t_tres:= t_tres + 1;
+      FinSegun
+      t_general:=t_general +1 ;
+      Escribir(Arch_S,reg_s);
+      Leer(Arch_E,reg_e);
+    FinMientras
+
+    Esc("La cantidad de articulos del tipo 1 es: ",t_uno);
+    Esc("La cantidad de articulos de tipo 2 es: ",t_dos);
+    Esc("La cantidad de archivos del tipo 3 es: ",t_tres);
+    Esc("El total general es: ",t_general);
+    Cerrar(Arch_E);
+    Cerrar(Arch_S);
+FinAccion
