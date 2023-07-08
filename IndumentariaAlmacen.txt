@@ -1,0 +1,176 @@
+Accion Parcial Es
+  Ambiente
+  prendas,ventas,salida:secuencia de caracter;
+  p,v,aux1,auxTalle,resgTalle:caracter;
+  bandera:boolean;
+  resg_valor,totalVentas,totalGuiones,cantidad,precio,mayorVenta,contS,contM,contL,contXL:entero;
+
+
+  Procedimiento ContadoryCopiado Es
+    Si (totalGuiones = 3) Entonces
+          AVZ(prendas,p);
+          auxTalle:=P;
+          Segun (auxTalle) Entonces
+            1 : contS:=contS +1;
+              Si(bandera = Verdadero )
+                Escribir(salida,auxTalle);
+              FinSi
+            2 : contM:=contM +1;
+              Si(bandera = Verdadero )
+                Escribir(salida,auxTalle);
+              FinSi
+            3 : contL:=contL +1;
+              Si(bandera = Verdadero )
+                Escribir(salida,auxTalle);
+              FinSi
+            4 : contXL:=contXL+1;
+              Si(bandera = Verdadero )
+                Escribir(salida,auxTalle);
+              FinSi
+          FinSegun
+          Sino
+            AVZ(prendas,p);
+        FinSi
+  FinProcedimiento
+
+  Procedimineto copiarSecuencia Es
+    Mientras (p = " ") Hacer
+          AVZ(prendas,p);
+        FinMientras
+        Mientras (p <> "-") Hacer
+          Si (bandera = Verdadero) Entonces
+            Escribir(salida,p);
+            AVZ(prendas,p);
+            Sino
+            AVZ(prendas,p);
+          FinSi
+        FinMientras
+  FinProcedimiento
+
+  Funcion a_entero(v:caracter):entero ES
+    Segun v hacer
+       ='1': a_entero:= 1;
+       ='2': a_entero:= 2;
+       ='3': a_entero:= 3;
+       ='4': a_entero:= 4;
+       ='5': a_entero:= 5;
+       ='6': a_entero:= 6;
+       ='7': a_entero:= 7;
+       ='8': a_entero:= 8;
+       ='9': a_entero:= 9;
+       ='0': a_entero:= 0;
+    Fin Segun
+  Fin Funcion
+
+
+  Proceso
+  ARR(prendas);
+  ARR(ventas);
+  CREAR(salida);
+  AVZ(prendas,p);
+  AVZ(ventas,v);
+  totalVentas:=0;
+  totalGuiones:=0;
+  mayorVenta:=0;
+  contS:=0;
+  contM:=0;
+  contL:=0;
+  contXL:=0;
+  bandera:=falso;
+
+  Mientras NFDS(prendas) y NDFS(ventas) Hacer
+    Mientras (p <> "&") y (v <> "!") Hacer
+        aux1:=p; 
+        AVZ(prendas,p);
+        Mientras (p <> "-") Hacer
+          Si(aux1 = "p") Entonces
+            bandera:= Verdadero;
+            Escribir(salida,p);
+            AVZ(prendas,p);
+            Sino
+            AVZ(prendas,p);
+          FinSI
+        FinMientras
+        Si(p = "-") Entonces
+          totalGuiones:=totalGuiones+1;
+        FinSI
+        ContadoryCopiado();
+        
+        //2da subsecuencia
+        copiarSecuencia();
+        Si(p = "-") Entonces
+          totalGuiones:=totalGuiones+1;
+        FinSI
+        ContadoryCopiado();
+
+        //3ra subsecuencia
+        copiarSecuencia();
+        Si(p = "-") Entonces
+          totalGuiones:=totalGuiones+1;
+        FinSI
+        ContadoryCopiado();
+
+        cantidad:=0;
+        precio:=0;
+        Mientras (v <> "-") Hacer
+          Si (bancera = Verdadero) Entonces
+              cantidad:= cantidad + a_entero(v) * 10
+              AVZ(Ventas, v)
+              cantidad:= cantidad + v;
+              AVZ(VENTAS, v)  
+        FinMientras
+        Mientras (V<>"-") HACER
+            precio:= precio + a_entero(v) * 100
+            AVZ(ventas, v)
+            precio:= precio + a_entero(v) * 10
+            AVZ(ventas, v)
+            precio:= precio + a_entero(v) ;
+            AVZ(ventas, v)
+        FIN MIENTRAS
+          Escribir(salida,"-");
+          totalVentas:= cantidad * precio;
+          Escribir(salida,totalVentas);
+          Escribir(salida,"$");
+          Mientras ( v<> "!") Hacer
+            AVZ(ventas,v);
+          FinMientras
+  FinMientras
+FinMientras 
+Si(contS > contM y contM>contL y contL>contXL) Entonces
+  resgTalle := S;
+  resg_valor := contS
+  Sino
+    Si(contM > contS y contS>contL y contL>contXL) Entonces
+      resgTalle := M;
+      resg_valor := contM;
+      Sino
+        Si (contL > contS y contS>contM y contM>contXL) Entonces
+          resgTalle := L;
+          resg_valor := contL;
+          Sino
+          Si(contXL > contS y contS>contL y contL>contM) Entonces
+            resgTalle := M;
+            resg_valor := contM;
+          FinSi
+      FinSi
+    FinSi
+FinSi
+
+Esc("El talle con mas cantidades de ventas es : ",resgTalle, "y la cantidad vendida es: ",resg_valor);
+Cerrar(prendas);
+Cerrar(ventas);
+Cerrar(Salida);
+
+FinAccion
+          
+          
+
+
+      
+              
+          
+
+
+
+         
+        
