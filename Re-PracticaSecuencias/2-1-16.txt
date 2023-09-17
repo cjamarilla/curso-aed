@@ -1,0 +1,31 @@
+Se dispone de una secuencia de números de DNI asignados a un circuito electoral,
+generar otra secuencia de números que contenga los DNI múltiplos de 3.
+
+Accion 2.1.16 Es
+personas,salida: secuencia de enteros;
+v:entero;
+
+Proceso
+ARR(personas);
+CREAR(salida);
+AVZ(personas,v);
+
+Mientras NFDS(personas) Hacer
+  Si(v MOD 3 = 0) Entonces
+     Escribir(salida,v);
+  FinSi
+  AVZ(personas,v);
+FinMientras
+
+Esc("Proceso Terminado");
+Cerrar(personas);
+Cerrar(salida);
+
+FinAccion
+
+
+--personas--
+39861384 | 15676543 |  39842123 | 43234544 | 23123321 | fds
+
+--salida--
+39861384 | 

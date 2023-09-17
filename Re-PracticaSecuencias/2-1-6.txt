@@ -1,0 +1,49 @@
+//Dada una secuencia de enteros que almacena la cantidad de habitantes de las ciudades capitales de las 23 provincias de la República Argentina,
+discriminados 4 categorías: menores de 18 años (varones y mujeres) y mayores de 18 años (varones y mujeres).
+Se pide determinar la población total y los siguientes porcentajes: masculinos,
+femeninos, mayores de 18 y menores de 18.
+
+Accion 2.1.6 Es
+
+  Ambiente
+  sec:secuencia de enteros;
+  v,i,total,v_men18,v_may18,m_men18,m_may18: entero;
+  p_vmen18,p_vmay18,p_Mmen18,p_Mmay18: real;
+
+  Proceso
+  ARR(sec);
+  AVZ(sec,v);
+  total:=0;
+  v_may18:=0;
+  v_men18:=0;
+  m_may18:=0;
+  m_men18:=0;
+  Para i:= 1 Hasta 23 Hacer
+    //Esta parte trata la parte de la secuencia que es para hombre mayores
+    total:= total + v ;
+    v_may18:= v_may18 + v;
+    AVZ(sec,v);
+    //Esta parte trata la parte de secuencia que es para hombres menores
+    total:= total + v ;
+    v_men18:= v_men18 + v;
+    AVZ(sec,v);
+    //Esta parte trata la parte de la secuencia que es para mujeres mayores
+    total:= total + v ;
+    m_may18:= m_may18 + v;
+    AVZ(sec,v);
+    //Esta parte trata la parte de la secuencia que es para mujeres menores
+    total:= total + v ;
+    m_men18:= m_men18 + v;
+    AVZ(sec,v);
+  FinPara
+  p_Mmay18:= (m_may18 / total);
+  p_Mmen18:= (m_men18 / total);
+  p_vmay18:= (v_may18 / total);
+  p_vmen18 := (v_men18 / total);
+  Esc("El total de poblacion de las 23 provincias son: ",total);
+  Esc("El promedio de varones mayores de 18 son: ",p_vmay18);
+  Esc("El promedio de varones menores de 18 son: ",p_vmen18);
+  Esc("El promedio de mujeres mayores de 18 son: ",p_Mmay18);
+  Esv("El promedio de mujeres menores de 18 son: ",p_Mmen18);
+  Cerrar(sec);
+FinAccion

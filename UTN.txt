@@ -1,0 +1,12 @@
+Accion UTN Es
+Ambiente
+  vivienda,tramites: secuencia de caracteres;
+  v,t:caracter;
+  resistencia,barranqueras,videla,fontana,i, cont: entero;
+  porcentaje:real;
+
+  Proceso
+  ARR(vivienda);
+  CREAR(tramites);
+  cont:=0;
+  

@@ -1,0 +1,30 @@
+//La secuencia de socios del problema anterior tiene el inconveniente de que 
+los números están ordenados pero no son correlativos.
+ Se desea generar una secuencia que contenga los números de socios que no figuran en la secuencia de socios.
+
+Accion 2.1.5 Es
+
+  Ambiente
+  socios,salida:secuencia de enteros;
+  nro: entero;
+  cont:entero;
+
+  Proceso
+  ARR(socios);
+  ARR(salida);
+  AVZ(socios,nro);
+  cont:=0;
+
+  Mientras NFDS(socios) Hacer
+    Si(nro > cont) Entonces
+        Escribir(salida,nro);
+        cont:=cont+1;
+        Sino
+        cont:= cont +1 ;
+    FinSi
+    AVZ(socios,nro);
+  FinMientras
+
+  CERRAR(socios);
+  CERRAR(salida);
+FinAccion

@@ -1,0 +1,94 @@
+Accion TechnoStore Es
+
+  Ambiente
+    Techno : Registro Es
+      Clave: Registro Es
+        Provincia: AN(60);
+        Cuidad: AN(60);
+        Sucursal: N(2);
+        Marca: AN(60);
+        Tipo_Producto: N(3);
+        Modelo: AN(100);
+      FinRegistro
+      Cantidad_Ventas:N(6);
+    FinRegistro
+
+    Arch: Archivo de Techno ordenado por Clave;
+    reg: Techno;
+    resg_prov:AN(60);
+    resg_sucursal:N(2);
+    resg_marca:AN(60);
+    total,acu_prov,acum_suc, acum_marca;
+
+     //utilize 1 contador y 3 acumuladores que corresponde a los 3 cortes por mas que el ultimo corte no es muy significativo me sirve para utilizar ese
+     acumulador para utlizar en la parte de tratar el archivo.
+
+    Procedimineto Inicializar Es
+      Abrir E/(Arch);
+      Leer(Arch,reg);
+      total:=0;   
+      acu_prov:=0;
+      acum_suc:=0;
+      acum_marca:=0;
+      resg_prov:= reg.Clave.Provincia;
+      resg_sucursal:= reg.Clave.Sucursal;
+      resg_marca:= reg.Clave.Marca;
+    FinProcedimiento
+
+    //Elegi usar 3 cortes por que el enunciado solo pide que se informe los totales por provincia,sucurtal y tipo , se puede discriminar cuidad.
+
+    Procedimiento Corte_Marca Es
+      Escribir("La marca es ",resg_marca,"y la cantidad que tiene es: ",acum_marca);
+      acum_suc:= acum_suc + acum_marca;
+      acum_tipo:=0;
+      resg_tipo:= reg.Clave.Tipo_Producto;
+    FinProcedimiento
+
+    Procedimiento Corte_Suc Es
+      Escribir("La sucursal es ",resg_sucursal," y tiene : ",acum_suc);
+      acu_prov:=acu_prov + acum_suc;
+      acum_suc:=0;
+      resg_sucursal:= reg.Clave.Sucursal;
+    FinProcedimiento
+
+    Procedimiento Corte_Prov Es
+      Esc("En la provincia ",resg_prov," hay : ",acu_prov);
+      total:= total + acu_prov;
+      acu_prov:=0;
+      resg_prov:= reg.Clave.Provincia;
+    FinProcedimiento
+
+    Procedimiento Tratar_Corte Es
+      Si (resg_prov <> reg.Clave.Provincia) Entonces
+        Corte_Prov();
+        Sino
+          Si (resg_sucursal <> reg.Clave.Sucursal) Entonces
+            Corte_Suc();
+            Sino
+              Si(resg_tipo <> reg.Clave.Tipo_Producto) Entonces
+                Corte_Tipo();
+              FinSi
+          FinSi
+      FinSi
+    FinProcedimiento
+
+    Proceso
+    Inicializar();
+    Mientras NFDA(Arch) Entonces
+    //Utilizo ese condicional por que necesito que respete que el archivo tenga menos de 100 ventas para poder hacer el tratamiento
+      Si(reg.Cantidad_Ventas < 100) Entonces
+        Tratar_Corte();
+        Si (reg.Clave.Tipo_Producto > 10) Entonces
+          acum_marca := acum_marca + 1;
+        FinSi
+        Leer(Arch,reg);
+      FinSi
+    FinMientras
+
+    Corte_Prov();
+    Esc("El total es : ",total);
+    Esc("La cantidad de sucursales con mas de 10 productos son: ",acum_marca);
+    Cerrar(Arch);
+
+FinAccion
+      

@@ -1,0 +1,25 @@
+//Se tiene una secuencia de enteros que contiene todos los CUIT de los empleados de una empresa, la misma termina con el CUIT 0.
+Para evitar largas esperas en los días de pago, la empresa necesita organizarlos de acuerdo al último dígito de su documento,
+generar una secuencia con los CUIT de las personas que su número de documento termine con 0, 1, 2 o 3.
+
+Accion 2.1.7 Es
+
+  Ambiente
+  cuit,salida:secuencia de enteros;
+  v:entero;
+  validos: {1,2,3,4};
+
+  Proceso
+  ARR(sec);
+  CREAR(salida);
+  AVZ(sec,v);
+  Mientras (v MOD 10 <> 0) HACER
+    Si ( (v MOD 100 DIV 10) EN validos) ENTONCES
+        Escribir(salida,v);
+    FinSi
+    AVZ(salida,v);
+  FinMientras
+
+  CERRAR(cuit);
+  CERRAR(salida);
+FinAccion 

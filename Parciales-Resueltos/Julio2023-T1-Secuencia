@@ -1,0 +1,116 @@
+//Ejercicio de Secuencia
+Accion PrimerParcial-Super-Tema1 Es
+
+Ambiente
+secuenciaArticulos, secuenciaVentas, SecuenciaSalida: secuencia de caracter;
+vArticulos,vVentas: caracter;
+envioSucursal, envioDomicilio,i ,stock , resg_m1, resg_m2, cond_suc : entero;
+m1,m2,res_m1, res_m2, resg_fenvio,: caracter;
+
+funcion conv_entero(v:caracter): entero
+  Segun (v) Hacer
+    ="0": conv_entero:=0;
+    ="1": conv_entero:=1;
+    ="2": conv_entero:=2;
+    ="3": conv_entero:=3;
+    ="4": conv_entero:=4;
+    ="5": conv_entero:=5;
+    ="6": conv_entero:=6;
+    ="7": conv_entero:=7;
+    ="8": conv_entero:=8;
+    ="9": conv_entero:=9;
+  FinSegun
+FinFuncion
+
+Proceso
+ARR(secuenciaArticulos);
+AVZ(secuenciaArticulos,vArticulos);
+ARR(secuenciaVentas);
+AVZ(secuenciaVentas,vVentas)
+CREAR(SecuenciaSalida);
+
+//Lee el caracter mes- hay varias formas de hacerlo tambien podria ingresar el numero y despues descomponer
+Escribir("Ingrese el mes para generar el informe de ventas, 2 digitos por separado: ");
+Leer(m1,m2);
+
+Mientras NFDS(secuenciaArticulos) Hacer
+  //Avanzo el codigo articulo
+  Para (i:=5 a 0) Hacer
+    AVZ(secuenciaArticulos,vArticulos);
+  FinPara
+  //Avanzo rubro
+  AVZ(secuenciaArticulos,vArticulos);
+  //Calculo stock
+  stock:=0;
+  Para (i=0 a 2) Hacer
+    stock:= stock * 10 + conv_entero(vArticulos);
+    AVZ(secuenciaArticulos,vArticulos);
+  FinPara
+  envioSucursal:=0;
+  enviosDomicilio:=0;
+  cond_suc:=0;
+  //Trato la secuencia de ventas de cada articulo
+  Mientras (vVentas <> "#") Hacer
+    //Avanzo solo 1 vez por que al avanzar al comienzo ya estoy en el primer caracter y solo necesito un avanzar mas para dia
+    AVZ(secuenciaVentas,vVentas);
+    //Primer caracter del mes
+    AVZ(secuenciaVentas,vVentas);
+    resg_m1:=vVentas;
+    //Segundo caracer del mes
+    AVZ(secuenciaVentas,vVentas);
+    resg_m2:=vVentas;
+    //Avanzo a forma de pago
+    AVZ(secuenciaVentas,vVentas);
+    //Avanza a forma de envio
+    AVZ(secuenciaVentas,vVentas);
+    resg_fenvio:=vVentas;
+    unidadesVendidas:=0;
+      Para (i:=1 a 0) Hacer
+        unidadesVendidas:= unidadesVendidas *10 + conv_entero(vVentas);
+        AVZ(secuenciaVentas,vVentas);
+      FinPara
+    Si (resg_fenvio = "S") Entonces
+      cond_suc:= cond_suc + unidadesVendidas;
+    FinSi
+    Si(resg_m1 = m1 y resg_m2 = m2) Entonces
+      Si (resg_fenvio = "S")  Entonces
+        envioSucursal:= envioSucursal + unidadesVendidas;
+        Sino
+        envioDomicilio:=envioDomicilio + unidadesVendidas;
+        FinSi
+      FinSi
+    //Avanzo si hay otro primer caracter de dia es decir otra venta o # por fin de ventas
+    AVZ(secuenciaVentas,vVentas);
+  FinMientras
+  AVZ(secuenciaVentas,vVentas);
+
+  Si( stock - cond_suc) = 0 Entonces
+    Mientras (vArticulos <> "&") Hacer
+      Escribir(vArticulos);
+      Escribir(SecuenciaSalida,vArticulos);
+      AVZ(secuenciaArticulos,vArticulos);
+    FinMientras
+    //Escribe "&" en la secuencia de salida
+    Escribir(SecuenciaSalida,vArticulos);
+    //Avanzo el &
+    AVZ(secuenciaArticulos,vArticulos);
+    Sino
+    //Como no se puede concatenar voy a mostrar caracter a caracter el nombre del articulo
+      Mientras (vArticulos <> "&") Hacer
+        Escribir(vArticulos);
+        AVZ(secuenciaArticulos,vArticulos);
+      FinMientras
+      //Avanza el &
+      AVZ(secuenciaArticulos,vArticulos);
+    FinSi
+    //Muesto el informe 
+    Escribir(envioSucursal,envioDomicilio);
+FinMientras
+
+CERRAR(secuenciaArticulos);
+CERRAR(secuenciaVentas);
+CERRAR(SecuenciaSalida);
+
+FinAccion
+
+

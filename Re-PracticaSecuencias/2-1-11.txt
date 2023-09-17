@@ -1,0 +1,28 @@
+//Dada una secuencia de caracteres, determinar la cantidad de palabras de 4 caracteres (letras)
+
+Accion 2.1.11 Es
+  Ambiente
+  sec: secuencia de caracter;
+  v: caracter;
+  cont_letra,cont_palabra: entero;
+
+  Proceso
+  ARR(sec);
+  AVZ(sec,v);
+  
+  cont_palabra:=0;
+  Mientras NFDS(sec) Hacer
+    cont_letra:=0;
+    Mientras (v = " ") Hacer   HOLA COMO ESTAS 
+      AVZ(sec,v);
+    FinMientras
+    Mientras (v <> " " y NFDS(sec)) Hacer
+      cont_letra:= cont_letra + 1;
+      AVZ(sec,v);
+    FinMientras
+    Si (cont_letra = 4) Entonces
+      cont_palabra:= cont_palabra +1 ;
+    FinSi
+  FinMientras
+  Esc("La cantidad de palabras con 4 letras dentro de la secuencia son: ",cont_palabra);
+FinAccion

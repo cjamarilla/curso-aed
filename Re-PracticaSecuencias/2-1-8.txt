@@ -1,0 +1,25 @@
+//Teniendo en cuenta el ejercicio anterior, se solicita que la secuencia de salida sea una secuencia de caracteres y los CUIT se separen unos de otros con el caracter "-".
+
+Accion 2.1.8 Es
+
+  Ambiente
+  Cuit,Salida:Secuencia de entero;
+  v:entero;
+  validos: {1, 2, 3, 4}
+
+  Proceso
+  ARR(Cuit);
+  CREAR(Salida);
+  AVZ(Cuit,v);
+
+    Mientras (V MOD 10 <> 0) HACER
+      Si ((V MOD 100) DIV 10 EN validos) ENTONCES
+        Escribir(Salida,v);
+        Escribri(Salida, "-");
+      FinSi
+      AVZ(Cuit,v);
+    FinMientras
+
+    CERRAR(Cuit);
+    CERRAR(Salida);
+FinAccion

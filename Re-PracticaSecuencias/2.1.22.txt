@@ -1,0 +1,52 @@
+Accion 2.1.22 Es
+  Ambiente
+  nombres,docuento,salida: secuencia de caracter;
+  n,d:caracter;
+  cont,i:entero;
+
+  Proceso
+  ARR(nombres);
+  ARR(documento);
+  CREAR(salida);
+  AVZ(nombres,n);
+  AVZ(documeno,d);
+  cont:=0;
+  Mientras (NFDS(nombres)) y (NFDS(documentos)) Hacer
+    cont:= cont+1;
+    Si (cont MOD 2 = 0) Entonces
+        Para (i :=1 HASTA 8) Hacer
+          Escribir(salida,d);
+          AVZ(documento,d);
+        FinPara
+        Escribir(salida,",");
+
+        Mientras (n = " ") Hacer
+          AVZ(nombres,n);
+        FinMientras
+
+        Mientras (n <> " " y NFDS(nombres)) Hacer
+          Escribir(salida,n);
+          AVZ(nombres,n);
+        FinMientras
+        Escribir(salida,"#");
+        Sino
+          Para (i:=1 HASTA 8) Hacer
+            AVZ(documento,d);
+          FinPara
+
+          Mientras( n = " ") Hacer
+            AVZ(nombres,n);
+          FinMientras
+
+          Mientras (n <> " " y NFDS(nombres)) Hacer
+            AVZ(nombres,n);
+          FinMientras
+      FinSi
+  FinMientras
+
+  CERRAR(nombres);
+  CERRAR(documento);
+  CERRAR(salida);
+
+FinAccion
+

@@ -1,0 +1,6 @@
+Se desea saber la cantidad promedio de palabras que contienen las oraciones de una secuencia de caracteres.
+Supóngase que los puntos son siempre contiguos al último caracter de la palabra.
+La secuencia finaliza con una marca.
+
+Accion 2.1.15 Es
+Ambiente

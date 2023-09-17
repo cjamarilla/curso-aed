@@ -1,0 +1,35 @@
+//Se dispone de una secuencia de caracteres. Se desea listar las palabras que comiencen con "ALG".
+
+Accion 2.1.12 Es
+
+Ambiente
+sec:secuencia de caracter;
+v:caracter;
+cont_palabra:entero;
+
+Proceso
+ARR(sec);
+AVZ(sec,v);
+cont_palabra:=0;
+
+Mientras NFDS(sec) Hacer
+  Mientras (v = " ") Hacer
+    AVZ(sec,v);
+  FinMientras
+  Si(v = "A") Entonces
+    AVZ(sec,v);
+    Si(v = "L") Entonces
+      AVZ(sec,v);
+      Si(v = "G") Entonces
+        cont_palabra:=cont_palabra +1 ;
+        AVZ(sec,v);
+      FinSi
+    FinSi
+  FinSi
+  Mientras (v <> " " y NFDS(sec)) Hacer
+    AVZ(sec,v);
+  FinMientras
+FinMientras
+Esc("La cantidad de la palabras que comienzan con "ALG" son: ",cont_palabra);
+FinAccion
+        

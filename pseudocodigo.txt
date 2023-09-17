@@ -1,0 +1,169 @@
+Accion STAR Es 
+
+Ambiente
+secEntrada: secuencia de caracter;
+v,aux:caracter;
+dia,mes,año,acuLibras,contNumeral:Entero;
+kilo, cantSus:real;
+bandera:boleano;
+
+formatoFecha = Registro Es
+  dd: 1..31;
+  mm: 1..12;
+  aaaa:N(4);
+FinRegistro
+
+Salida = Registro Es
+  Fecha: formatoFecha;
+  nombres_materiales: AN(20);
+FinRegistro
+
+Arch: Archivo de Salida;
+reg: Salida;
+
+Funcion aNum(v:caracter): Entero Es
+  Segun (v) Entonces
+    "0": aNum:=0;
+    "1": aNum:=1;
+    "2": aNum:=2;
+    "3": aNum:=3;
+    "4": aNum:=4;
+    "5": aNum:=5;
+    "6": aNum:=6;
+    "7": aNum:=7;
+    "8": aNum:=8;
+    "9": aNum:=9;
+  FinSegun
+FinFuncion
+
+Funcion acumularLibras(v:caracter) Entero Es
+  acum:entero;
+  Mientras (v>"#") Hacer
+    acum:= acum + aNum(v);
+    acum:= acum * 10;
+    AVZ(secEntrada,v);
+  FinMientras
+  acumularLibras:= acum;
+FinFuncion;
+
+Funcion conversionLibras(num: entero) Real Es
+  kilogramos:real;
+  kilogramos:= (num * 1) DIV (2.205);
+  conversionLibras:= kilogramos;
+FinFuncion;
+
+Procedimiento tratarDia() Es
+  dia:= aNum(v) * 10;
+  AVZ(secEntrada,v);
+  dia:= mes + aNum(v);
+    Si(aux = "N") Entonces
+      reg.Fecha.dd:=dia;
+      Grabar(Arch,reg);
+    FinSi
+FinProcedimiento
+
+Procedimiento tratarMes() Es
+  mes:= aNum(v) * 10;
+  AVZ(secEntrada,v);
+  mes:= mes + aNum(v);
+    Si(aux="N") Entonces
+      reg.Fecha.mm:=mes;
+      Grabar(Arch,reg);
+    FinSi
+FinProcedimiento
+
+Procedimiento tratarAño() Es
+  año:= aNum(v) * 1000;
+  AVZ(secEntrada,v);
+  año:= año + (aNum(v) * 100);
+  AVZ(secEntrada,v);
+  año:= año + (aNum(v) * 10);
+  AVZ(secEntrada,v);
+  año:= año + aNum(v);
+    Si( aux = "N") Entonces
+      reg.Fecha.aaaa:= año;
+      Grabat(Arch,reg);
+    FinSi
+FinProcedimiento
+
+Procedimiento contarNumeral() Es
+  Si( v = "#") Entonces
+    contarNumeral:=contarNumeral +1;
+  FinSi
+FinProcedimiento
+
+Procedimiento revCondicion () Es
+  Si (contarNumeral = 3) Entonces
+      bandera:= Verdadero;
+      Sino
+      AVZ(secEntrada,v);
+  FinSi
+FinProcedimiento
+
+Procedimiento Reseteo() Es
+  bandera:= Falso;
+  dia:=0;
+  mes:=0;
+  año:=0;
+  contNumeral:=0;
+  acuLibras:=0;
+  kilo:=0;
+  cantSus:=0;
+  acumSus:=0;
+FinProcedimiento
+
+Proceso
+ARR(secEntrada);
+AVZ(secEntrada,v);
+ABRIR /S(Arch);
+Mientras NFDS(secEntrada) Hacer
+  Reseteo();
+  Mientras (bandera <> Verdadero) Hacer
+    cantSus:= cantSus + 1;
+    aux:=v;
+    AVZ(secEntrada,v);
+    tratarDia();
+    AVZ(secEntrada,v);
+    tratarMes();
+    AVZ(secEntrada,v);
+    tratarAño();
+    AVZ(secEntrada,v);
+    Mientras (v<> "#") Hacer
+      Si (aux = "N") Entonces
+        reg.nombres_materiales:= reg.nombres_materiales + (v);
+        Grabar(Arch,reg);
+        Sino
+        AVZ(secEntrada,v);
+      FinSi
+    FinMientras
+    contarNumeral();
+    revCondicion();
+    Mientras(v<> "#") Hacer
+      AVZ(secEntrada,v);
+    FinMientras
+    contarNumeral();
+    revCondicion();
+    Mientras (v <> "#") Hacer
+      acuLibras := acumularLibras(v);
+      kilo := conversionLibras(acuLibras);
+    FinMientras
+    contarNumeral();
+    revCondicion();
+  FinMientras
+   //Parte 1
+   Esc("El nombre de la sustancia almacenada es ",reg.nombres_materiales," y su peso es kilogramos es : ",kilo);
+   //Parte 2  grabado fecha y nombre 
+   //parte 3
+   Si(año = "2022") Entonces
+
+
+
+
+
+
+
+
+
+  
+
+

@@ -1,0 +1,22 @@
+//Se dispone de una secuencia de caracteres y se desea obtener una secuencia de salida
+ que resulte de copiar la secuencia de entrada, descartando el caracter "$".
+
+ Accion 2.1.3 Es
+  Ambiente
+  entrada,salida: secuencia de caracter;
+  v: caracter;
+
+  Proceso
+  ARR(entrada);
+  ARR(salida);
+  AVZ(entrada,v);
+  Mientras NFDS(entrada) Hacer
+    Si (e <> "$") Entonces
+      Escribir(salida,v);
+    FinSi
+    AVZ(entrada,e);
+  FinMientras
+
+  Cerrar(entrada);
+  Cerrar(salida);
+FinAccion
