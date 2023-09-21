@@ -1,0 +1,68 @@
+Accion Ejercicio 2.2.16 (INCLUYENTE) Es
+  Ambiente
+  
+  Fecha = Registro Es
+    dd: 1..31;
+    mm: 1..12;
+    aaaa:N(4);
+  FinRegistro
+
+  Peliculas = Registro Es
+    Nro_peliculas:N(4);
+    Titulo:AN(10);
+    Genero:AN(2);
+    Cant_Copias: N(6);
+    Fecha_Estreno: Fecha;
+  FinRegistro
+
+  arch_nuevo, arch_pel, arch_salida: Archivos de Peliculas ordenado por Nro_peliculas;
+  reg_nuevo, reg_pel, reg_sal: Peliculas;
+
+  Procedimiento Leer_Nuevas() Es
+    Leer(arch_nuevo,reg_nuevo);
+    Si FDA(arch_nuevo) Entonces
+      reg_nuevo.Nro_peliculas := HV;
+    FinSI
+  FinProcedimiento
+
+  Procedimiento Leer_Peliculas() Es
+    Leer(arch_pel,reg_pel);
+    Si FDA(arch_pel) Entonces
+      reg_pel.Nro_peliculas := HV;
+    FinSI
+  FinProcedimiento
+
+  Proceso
+  ABRIR(arch_nuevo);
+  Leer(arch_nuevo,reg_nuevo);
+  ABRIR(arch_pel);
+  Leer(arch_pel,reg_pel);
+  ABRIR(arch_salida);
+
+  Mientras NFDA (arch_nuevo) y NFDA(arch_pel) Entonces
+    Si(reg_nuevo.Nro_peliculas < reg_pel.Nro_peliculas) Entonces
+      reg_sal:= reg_nuevo;
+      Escribir(arch_salida,reg_sal);
+      Leer_Nuevas();
+
+      Sino
+        Si(reg_pel.Nro_peliculas < reg_nuevo.Nro_peliculas) Entonces
+          reg_sal:= reg_pel;
+          Escribir(arch_salida,reg_sal);
+          Leer_Nuevas();
+
+          Sino
+            Si (reg_pel = reg_nuevo) Entonces
+              reg_sal:= reg_pel;
+              Escribir(arch_salida,reg_sal);
+              Leer_Nuevas();
+              Leer_Peliculas();
+            FinSI
+        FinSI
+    FinSI
+  FinMientras
+
+  CERRAR(arch_nuevo);
+  CERRAR(arch_pel);
+  CERRAR(arch_salida);
+FinAccion
