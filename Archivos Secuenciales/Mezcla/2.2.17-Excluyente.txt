@@ -30,11 +30,11 @@ Accion 2.2.17 (Excluyente) Es
 
 
   Proceso
-  ABRIR(arch_agosto);
+  ABRIR E/(arch_agosto);
   Leer(arch_agosto,reg_agosto);
-  ABRIR(arch_febrero);
+  ABRIR E/(arch_febrero);
   Leer(arch_febrero);
-  ABRIR(arch_seguimiento);
+  ABRIR /S(arch_seguimiento);
 
   Mientra NFDA(arch_febrero) y NFDA(arch_agosto) Hacer
     Si(reg_febrero.Nro_Dni > reg_agosto.Nro_Dni) Entonces

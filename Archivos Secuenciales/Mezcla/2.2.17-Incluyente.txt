@@ -43,9 +43,9 @@ Accion 2.2.17 (Incluyente) Es
   FinProcedimiento
 
   Proceso
-  ABRIR(arch_agosto); Leer(arch_agosto,reg_agosto);
-  ABRIR(arch_febrero); Leer(arch_febrero,reg_febrero);
-  ABRIR(arch_seguimiento);
+  ABRIR E/(arch_agosto); Leer(arch_agosto,reg_agosto);
+  ABRIR E/(arch_febrero); Leer(arch_febrero,reg_febrero);
+  ABRIR /S(arch_seguimiento);
 
   Mientras NFDA(arch_febrero) y NFDA(arch_agosto) Hacer
     Si(reg_febrero.Nro_Dni > reg_agosto.Nro_Dni) Entonces

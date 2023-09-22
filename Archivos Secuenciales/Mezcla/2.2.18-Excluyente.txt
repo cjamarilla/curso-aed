@@ -1,0 +1,73 @@
+Accion 2.2.18 (Excluyente) Es
+
+  Ambiente
+
+  Articulos = Registro Es
+    Cod_Pro:N(8);
+    Tipo: AN(10);
+    Marca:AN(20);
+    Descrip: AN(30);
+    Cant_Uni: N(8);
+  FinRegistro
+
+
+  arch_uno, arch_dos, arch_salida: Archivo del tipo Articulos ordenado por Cod_Pro;
+  reg_uno, reg_dos, reg_salida: Articulos;
+  tot_suc1, tot_suc2: N;
+  Proceso
+  ABRIR E/(arch_uno); LEER(arch_uno);
+  ABRIR E/(arch_dos); LEER(arch_dos);
+  ABRIR /S(arch_salida);
+
+  tot_suc1:=0;
+  tot_suc2:=0;
+
+  Mientras NFDA(arch_uno) y NFDA(arch_dos) Hacer
+    Si(reg_uno.Cod_Pro < reg_dos.Cod_Pro) Entonces
+      reg_salida:= reg_uno;
+      tot_suc1:= reg_uno.Cant_Uni;
+      tot_suc2:=0;
+      Escribir(arch_salida, reg_salida.Cod_Pro, reg_salida.Tipo, reg_salida.Marca, reg_salida.Descrip, tot_suc1, tot_suc2, reg_salida.Cant_Uni);
+      Leer(arch_uno,reg_uno);
+      Sino
+        Si(reg_dos.Cod_Pro < reg_uno.Cod_Pro) Entonces
+          reg_salida:= reg_dos;
+          tot_suc1:= 0;
+          tot_suc2:= reg_dos.Cant_Uni;
+          Escribir(arch_salida, reg_salida.Cod_Pro, reg_salida.Tipo, reg_salida.Marca, reg_salida.Descrip,tot_suc1, tot_suc2, reg_salida.Cant_Uni);
+          Leer(arch_dos,reg_dos);
+          Sino
+            Si(reg_uno.Cod_Pro = reg_dos.Cod_Pro) Entonces
+              reg_salida:= reg_uno;
+              tot_suc1:= reg_uno.Cant_Uni;
+              tot_suc2:= reg_dos.Cant_Uni;
+              Escribir(arch_salida, reg_salida.Cod_Pro, reg_salida.Tipo, reg_salida.Marca, reg_salida.Descrip, tot_suc1, tot_suc2, reg_salida.Cant_Uni);
+              Leer(arch_uno,reg_uno);
+            FinSi
+        FinSi
+    FinSi
+  FinMientras
+
+  Mientras NFDA(arch_uno) Hacer
+    reg_salida:= reg_uno;
+    tot_suc1:= reg_uno.Cant_Uni;
+    tot_suc2:= 0;
+    Escribir(arch_salida, reg_salida.Cod_Pro, reg_salida.Tipo, reg_salida.Marca, reg_salida.Descrip, tot_suc1, tot_suc2, reg_salida.Cant_Uni);
+    Leer(arch_uno,reg_uno);
+  FinMientras
+
+  Mientras NFDA(arch_dos) Hacer
+    reg_salida:= reg_dos;
+    tot_suc1:=0;
+    tot_suc2:= reg_dos.Cant_Uni;
+    Escribir(arch_salida, reg_salida.Cod_Pro, reg_salida.Tipo, reg_salida.Marca, reg_salida.Descrip, tot_suc1, tot_suc2, reg_salida.Cant_Uni);
+    Leer(arch_dos,reg_dos);
+  FinMientras
+
+  CERRAR(arch_uno);
+  CERRAR(arch_dos);
+  CERRAR(arch_salida);
+
+FinAccion
+
+          

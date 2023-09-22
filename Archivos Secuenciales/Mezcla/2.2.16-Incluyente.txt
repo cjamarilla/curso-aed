@@ -33,11 +33,11 @@ Accion Ejercicio 2.2.16 (INCLUYENTE) Es
   FinProcedimiento
 
   Proceso
-  ABRIR(arch_nuevo);
+  ABRIR E/(arch_nuevo);
   Leer(arch_nuevo,reg_nuevo);
-  ABRIR(arch_pel);
+  ABRIR E/(arch_pel);
   Leer(arch_pel,reg_pel);
-  ABRIR(arch_salida);
+  ABRIR /S(arch_salida);
 
   Mientras NFDA (arch_nuevo) y NFDA(arch_pel) Entonces
     Si(reg_nuevo.Nro_peliculas > reg_pel.Nro_peliculas) Entonces
