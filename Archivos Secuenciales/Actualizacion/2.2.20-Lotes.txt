@@ -1,0 +1,89 @@
+Accion 2.2.20 (Actualizacion por Lotes) Es
+
+  Ambiente
+
+  Fecha = Registro Es
+    dd: 1..31;
+    mm: 1..12;
+    aaaa:N(4);
+  FinRegistro
+
+  Examenes = Registro Es
+    Nro_Legajo :N(5);
+    Carrera: AN(10);
+    Cod_Materia: N(6);
+    Fecha_Examen: Fecha;
+    Nota: N(2);
+  FinRegistro
+  
+  Facultad= Registro Es
+      ApellidoyNombre:AN(20);
+      Carrera:{"ISI","IQ","IEM","IQ"};
+      Nro_Legajo: N(5);
+      Nacimiento: Fecha;
+      Ingreso:Fecha;
+      Dni:N(8);
+      Sexo:{"M","F"};
+      Ultimo_Examen_Aprobado:Fecha;
+      Nota:N(2);
+    FinRegistro
+
+    arch_fac, arch_sal: Archivo de Facultad ordenado por Nro_Legajo;
+    reg_fac, reg_sal, reg_aux: Facultad;
+    arch_exam: Archivo de Examenes ordenado por Nro_Legajo;
+    reg_exam: Examenes;
+
+    Procedimiento Leer_Facultad() Es
+      Leer(arch_fac, reg_fac);
+      Si FDA(arch_fac) Entonces
+        reg_fac.Nro_Legajo := HV;
+      FinSi
+    FinProcedimiento 
+
+    Procedimiento Leer_Examenes() Es
+      Leer(arch_exam, reg_exam);
+      Si FDA(arch_exam) Entonces
+        reg_exam.Nro_Legajo:= HV;
+      FinSi
+    FinProcedimiento
+
+    Proceso
+    ABRIR E/(arch_fac);
+    ABRIR E/(arch_exam);
+    ABRIR /S(arch_sal);
+    Leer_Facultad();
+    Leer_Examenes();
+
+    Mientras (reg_fac.Nro_Legajo <> HV) y (reg_exam.Nro_Legajo <> HV) Hacer
+      Si (reg_fac.Nro_Legajo < reg_exam.Nro_Legajo) Entonces
+        reg_sal:= reg_fac;
+        Escribir(arch_sal, reg_sal);
+        Leer_Facultad();
+        Sino
+          Si(reg_fac.Nro_Legajo = reg_exam.Nro_Legajo) Entonces
+            reg_aux:= reg_fac;
+            Mientras (reg_fac.Nro_Legajo = reg_exam.Nro_Legajo) Hacer
+              Si(reg_exam.Nota > 5) Entonces
+                reg_aux.Nota:= reg_exam.Nota;
+                reg_aux.Fecha_Examen:= reg_exam.Fecha_Examen;
+              FinSi
+              Leer_Examenes();
+            FinMientras
+            
+            reg_sal:= reg_aux;
+            Escribir(arch_sal, reg_sal);
+            Leer_Facultad();
+            Sino
+              Si (reg_fac.Nro_Legajo > reg_exam.Nro_Legajo) Entonces
+                Leer_Examenes();
+                Esc("Legajo erroneo no esta en la base de datos: ", reg_exam.Nro_Legajo);
+              FinSi
+          FinSi
+      FinSi
+    FinMientras
+
+    Cerrar(arch_exam);
+    Cerrar(arch_fac);
+    Cerrar(arch_sal);
+
+FinAccion
