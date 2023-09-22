@@ -1,0 +1,118 @@
+Accion 2.2.19 (Actualizacion Unitaria) Es
+
+  Ambiente
+
+  Fecha = Registro Es
+    dd: 1..31;
+    mm: 1..12;
+    aaaa:N(4);
+  FinRegistro
+
+  Maestro = Registro Es
+      Clave = Registro Es
+        Farmacia:N(2);
+        Medicamento:N(5);
+      FinRegistro
+    Cant_Actual:N(8);
+    Fecha_Vencimiento: Fecha;
+  FinRegistro
+
+  Movimientos = Registro Es
+    Clave = Registro Es
+      Farmacia: N(2);
+      Medicamento: N(5);
+    FinRegistro
+    Cod_Mov: 1..3;
+    Cant_recibida: N(6);
+  FinRegistro
+
+  Vencidos = Registro Es
+    Medicamento: N(5);
+    Cant_Vencida: N(6);
+  FinRegistro
+
+  arch_mae, arch_salida: Archivo de Mae ordenado por Clave;
+  reg_mae, reg_salida: Mae;
+  arch_mov: Archivo de Movimientos ordenado por Clave;
+  reg_mov: Movimientos;
+  arch_vencidos: Archivo de Vencidos;
+  reg_vencidos: Vencidos;
+
+  Procedimiento Leer_Maestro() Es
+    Leer(arch_mae, reg_mae);
+    Si FDA(arch_mae) Entonces
+      reg_mae.Clave:= HV;
+    FinSi
+  FinProcedimiento
+
+  Procedimiento Leer_Movimientos() Es
+    Leer(arch_mov, reg_mov);
+    Si FDA(arch_mov) Entonces
+      reg_mov.Clave:= HV;
+    FinSi
+  FinProcedimiento
+
+  Proceso
+  ABRIR E/(arch_mae);
+  ABRIR E/(arch_mov);
+  ABRIR /S(arch_salida);
+  ABRIR /S(arch_vencidos);
+  Leer_Maestro();
+  Leer_Movimientos();
+
+  Mientras (arch_mae <> HV) y (arch_mov <> HV) Hacer
+    Si (reg_mae.Clave < reg_mov.Clave) Entonces
+      reg_salida:= reg_mae;
+      Escribir(arch_salida, reg_salida);
+      Leer_Maestro();    
+      Sino
+        Si (reg_mae.Clave = reg_mov.Clave) Entonces
+          Segun (reg_mov.Cod_Mov) Entonces
+            1:
+            Escribir("Error alta invalida);
+            reg_salida:= reg_mae;
+            Escribir(arch_salida, reg_salida);
+
+            2:
+            reg_vencidos.Medicamento := reg_mae.Clave.Medicamento;
+            reg_vencidos.Cant_Vencida := reg_mae.Cant_Actual;
+            Escribir(arch_vencidos, reg_vencidos);
+
+            3:
+            reg_vencidos:= reg_mae;
+            reg_vencidos.Cant_Vencida := reg_mae.Cant_recibida;
+            Escribir(arch_vencidos,reg_vencidos);
+          FinSegun
+          Leer_Maestro();
+          Leer_Movimientos();
+          Sino
+            Si(reg_mov.Clave < reg_mae.Clave) Entonces
+              Segun(reg_mae.Cod_Mov) Entonces
+                1:
+                reg_salida.Clave.Farmacia := reg_mov.Clave.Farmacia;
+                reg_salida.Clave.Medicamento := reg_mov.Clave.Medicamento;
+                reg_salida.Cant_Actual:= reg_mov.Cant_recibida;
+                reg_salida.Fecha:= Fecha_Actual() + 30;
+                
+                2:
+                Escribir("Error baja invalida);
+
+                3:
+                Escribir("Error modificacion invalida");
+              FinSegun
+
+              Leer_Movimientos();
+            FinSi
+        FinSi
+    FinSi
+  FinMientras
+
+  Cerrar(arch_mae);
+  Cerrar(arch_mov);
+  Cerrar(arch_salida);
+  Cerrar(arch_vencidos);
+
+FinAccion  
+
+
+
