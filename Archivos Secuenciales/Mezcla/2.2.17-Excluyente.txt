@@ -1,0 +1,75 @@
+Accion 2.2.17 (Excluyente) Es
+
+  Ambiente
+
+  Fecha = Registro Es
+    dd: 1..31;
+    mm: 1..12;
+    aaaa:N(4);
+  FinRegistro
+
+  Aspirante = Registro Es
+    Nro_Dni: N(8);
+    ApeyNom: AN(20);
+    Carrera: AN(4);
+    Fech_Nac: Fecha;
+    Email: AN(20);
+    Colegio: AN(20);
+    Fecha_Insc: Fecha;
+  FinRegistro
+
+  Seguimiento = Registro Es
+    Nro_Dni:N(8);
+    ApeyNom:AN(20);
+    Email:AN(20);
+    Colegio: AN(20);
+
+  arch_agosto, arch_febrero: Archivo de tipo Aspirante;
+  arch_seguimiento: Archivo del tipo Seguimiento ordenado por Nro_Dni;
+  reg_agosto, reg_febrero, reg_seguimiento: Aspirante;
+
+
+  Proceso
+  ABRIR(arch_agosto);
+  Leer(arch_agosto,reg_agosto);
+  ABRIR(arch_febrero);
+  Leer(arch_febrero);
+  ABRIR(arch_seguimiento);
+
+  Mientra NFDA(arch_febrero) y NFDA(arch_agosto) Hacer
+    Si(reg_febrero.Nro_Dni > reg_agosto.Nro_Dni) Entonces
+      reg_seguimiento:= reg_febrero;
+      Escribir(arch_seguimiento, reg_seguimiento);
+      Leer(arch_febrero, reg_febrero);
+      Sino
+        Si(reg_febrero.Nro_Dni < reg_agosto.Nro_Dni) Entonces
+          reg_seguimiento:= reg_agosto;
+          Escribir(arch_seguimiento, reg_seguimiento);
+          Leer(arch_agosto, reg_agosto);
+          Sino
+            Si(reg_febrero.Nro_Dni = reg_agosto.Nro_Dni) Entonces
+              reg_seguimiento:= reg_febrero;
+              Escribir(arch_seguimiento, reg_seguimiento);
+              Leer(arch_febrero, reg_febrero);
+            FinSI
+        FinSI
+    FinSI
+  FinMientras
+
+  Mientras NFDA(arch_febrero) Hacer
+    reg_seguimiento:= reg_febrero;
+    Escribir(arch_seguimiento, reg_seguimiento);
+    Leer(arch_febrero,reg_febrero);
+  FinSI
+
+  Mientras NFDA(arch_agosto) Hacer
+    reg_seguimiento:= reg_agosto;
+    Escribir(arch_seguimiento, reg_seguimiento);
+    Leer(arch_agosto, reg_agosto);
+  FinMientras
+
+  Cerrar(arch_febrero);
+  Cerrar(arch_agosto);
+  Cerrar(arch_seguimiento);
+
+FinAccion
