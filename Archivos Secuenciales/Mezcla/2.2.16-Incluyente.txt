@@ -40,7 +40,7 @@ Accion Ejercicio 2.2.16 (INCLUYENTE) Es
   ABRIR(arch_salida);
 
   Mientras NFDA (arch_nuevo) y NFDA(arch_pel) Entonces
-    Si(reg_nuevo.Nro_peliculas < reg_pel.Nro_peliculas) Entonces
+    Si(reg_nuevo.Nro_peliculas > reg_pel.Nro_peliculas) Entonces
       reg_sal:= reg_nuevo;
       Escribir(arch_salida,reg_sal);
       Leer_Nuevas();

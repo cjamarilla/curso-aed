@@ -30,20 +30,19 @@ Accion 2.2.16 (Excluyente) Es
     Si(reg_nuevo.Nro_peliculas < reg_pel.Nro_peliculas) Entonces
       reg_sal:= reg_nuevo;
       Escribir(arch_salida,reg_sal);
-      Leer_Nuevas();
+      Leer(arch_nuevo,reg_nuevo);
 
       Sino
         Si(reg_pel.Nro_peliculas < reg_nuevo.Nro_peliculas) Entonces
           reg_sal:= reg_pel;
           Escribir(arch_salida,reg_sal);
-          Leer_Nuevas();
+          Leer(arch_pel,reg_pel);
 
           Sino
             Si (reg_pel = reg_nuevo) Entonces
               reg_sal:= reg_pel;
               Escribir(arch_salida,reg_sal);
-              Leer_Nuevas();
-              Leer_Peliculas();
+              Leer(arch_pel,reg_pel);
             FinSI
         FinSI
     FinSI
