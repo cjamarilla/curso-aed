@@ -1,0 +1,58 @@
+Accion 2.2.21 (Actualizacion unitaria) Es
+  Ambiente
+
+  Fecha = Registro Es
+    dd: 1..31;
+    mm: 1..12;
+    aaaa: N(4);
+  FinRegistro
+
+  Amigos =  Registro Es
+    Clave = Registro Es
+      Cod_Usuario: N(6);
+      Cod_Amigo: N(5);
+    FinRegistro
+    Fecha_Amistad: Fecha;
+    Mensaje_Muro: AN(50);
+  FinRegistro
+
+  Notificaciones = Registro Es
+    Clave= Registro Es
+      Cod_Usuario: N(6);
+      Cod_Amigo: N(5);
+      Cod_Movimiento:("A","B","M");
+    FinRegistro
+    Fecha_Amistad: Fecha;
+    Mensaje_Muro: AN(50);
+  FinRegistro
+
+  arch_amigo, arch_salida: Archivo de tipo Amigos ordenado por Clave;
+  reg_amigo, reg_salida: Amigos;
+  arch_noti: Archivo de tipo Notificaciones ordenado por Clave;
+  reg_noti: Notificaciones;
+
+  Procedimiento Leer_Amigos() Es
+    Leer(arch_amigo,reg_amigo);
+    Si FDA(arch_amigo) Entonces
+      reg_amigo.Clave.Cod_Usuario:= HV;
+      reg_amigo.Clave.Cod_Amigo := HV;
+    FinSi
+  FinProcedimiento
+
+  Procedimiento Leer_Notificaciones() Es
+    Leer(arch_noti, reg_noti);
+    Si FDA(arch_noti) Entonces
+      reg_noti.Clave.Cod_Usuario:=HV;
+      reg_noti.Clave.Cod_Amigo:= HV;
+    FinSi
+  FinProcedimiento
+
+  Proceso
+  ABRIR E/(arch_amigo);
+  ABRIR E/(arch_noti);
+  ABRIR /S(arch_salida);
+  Leer_Amigos();
+  Leer_Notificaciones();
+
+  Mientras (reg_amigo.Clave <> HV) y (reg_noti.Clave <> HV) Hacer
+    Si(reg_amigo.Clave < reg_noti.Clave)
