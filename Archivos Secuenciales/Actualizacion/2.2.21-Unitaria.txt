@@ -55,4 +55,6 @@ Accion 2.2.21 (Actualizacion unitaria) Es
   Leer_Notificaciones();
 
   Mientras (reg_amigo.Clave <> HV) y (reg_noti.Clave <> HV) Hacer
-    Si(reg_amigo.Clave < reg_noti.Clave)
+    Si(reg_amigo.Clave < reg_noti.Clave) Entonces
+      reg_salida:= reg_amigo;
+      
