@@ -1,4 +1,4 @@
-Accion 2.2.21 (Actualizacion unitaria) Es
+Accion 2.2.22 (Actualizacion unitaria) Es
   Ambiente
 
   Fecha = Registro Es
@@ -47,14 +47,38 @@ Accion 2.2.21 (Actualizacion unitaria) Es
     FinSi
   FinProcedimiento
 
+  Cont_Amigos: N;
+  Resguardo: N(6);
+  Mostrar_Mayor: N(6);
+  Mayor_cont_Amigos:N;
+
+  Procedimiento Obtener_Mayor() Es
+    Si (reg_amigo.Clave.Cod_Usuario = Resguardo) Entonces
+      Cont_Amigos:= Cont_Amigos + 1;
+      Sino
+        Si(reg_amigo.Clave.Cod_Usuario <> HV) Entonces
+          Si(Cont_Amigos > Mayor_cont_Amigos) Entonces
+            Mayor_cont_Amigos := Cont_Amigos;
+            Mostrar_Mayor := Resguardo;
+          FinSi
+          Resguardo:= reg_amigo.Clave.Cod_Usuario;
+          Cont_Amigos:=0;
+        FinSi
+    FinSi
+  FinProcedimiento
+
   Proceso
   ABRIR E/(arch_amigo);
   ABRIR E/(arch_noti);
   ABRIR /S(arch_salida);
   Leer_Amigos();
   Leer_Notificaciones();
+  Cont_Amigos:=0;
+  Mayor_cont_Amigos:=0;
+  Resguardo:= reg_amigo.Clave.Cod_Usuario;
 
   Mientras (reg_amigo.Clave <> HV) y (reg_noti.Clave <> HV) Hacer
+    Obtener_Mayor();
     Si(reg_amigo.Clave < reg_noti.Clave) Entonces
       reg_salida:= reg_amigo;
       Escribir(arch_salida,reg_salida);
@@ -103,5 +127,5 @@ Accion 2.2.21 (Actualizacion unitaria) Es
   CERRAR(arch_amigo);
   CERRAR(arch_noti);
   CERRAR(arch_salida);
-
+  Esc("El usuario con mayor cantidad de amigos fue: ",Mostrar_Mayor);
 FinAccion
