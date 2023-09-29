@@ -1,0 +1,107 @@
+Accion 2.2.23-Lotes Es
+
+  Ambiente
+  Fecha = Registro Es
+    dd: 1..31;
+    mm: 1..12;
+    aaaa:N(4);
+  FinRegistro
+
+  Cliente = Registro Es
+    Clave = Registro Es
+      Id_Casa:N(4);
+    FinRegistro
+    Fecha_Ult_Lectura: Fecha;
+    Cant_Lecturas: N(7);
+    Prom_Lecturas:N(2,2);
+    Tipo_Consumidor: {"A","B","C"};
+  FinRegistro
+
+  Mediciones =  Registro Es
+    Clave = Registro Es
+      Id_Casa:N(4);
+    FinRegistro
+    Fecha_Medicion: Fecha;
+    Consumo: N(7);
+  FinRegistro
+
+  arch_maestro, arch_salida: Archivo de tipo Cliente ordenado por Clave;
+  reg_maestro: Cliente;
+  arch_medicion: Archivo de tipo Mediciones ordenado por Clave;
+  reg_medicion: Mediciones;
+
+  Procedimiento Leer_Clientes() Es
+    Leer(arch_maestro, reg_maestro);
+    Si FDA(arch_maestro) Entonces
+        reg_maestro.Clave.Id_Casa:= HV;
+    FinSi
+  FinProcedimiento
+
+  Procedimiento Leer_Mediciones() Es
+    Leer(arch_medicion, reg_medicion);
+    Si FDA(arch_medicion) Entonces
+      reg_medicion.Clave.Id_Casa:=HV;
+    FinSi
+  FinProcedimiento
+
+  Proceso
+  ABRIR E/(arch_maestro);
+  ABRIR E/(arch_medicion);
+  ABRIR /S(arch_salida);
+  Leer_Mediciones();
+  Leer_Clientes();
+
+  Mientras (reg_maestro.Clave <> HV) y (reg_medicion.Clave <> HV) Hacer
+    Si(reg_maestro.Clave < reg_medicion.Clave) Entonces
+      GRABAR(arch_salida,reg_maestro);
+      Leer_Clientes();
+      Sino
+        Si(reg_maestro.Clave = reg_medicion.Clave) Entonces
+          Mientras (reg_maestro.Clave = reg_medicion.Clave) Hacer
+            Si (reg_maestro.Fecha_Medicion.aaaa < 2015) o ((reg_medicion.Fecha_Medicion.aaaa = 2015) y (reg_medicion.Fecha_Medicion.mm = 1)) Entonces
+              reg_maestro.Prom_Lecturas:= (reg_maestro.Cant_Lecturas * reg_maestro.Prom_Lecturas) / reg_medicion.Consumo / reg_maestro.Cant_Lecturas + 1;
+              reg_maestro.Cant_Lecturas:= reg_maestro.Cant_Lecturas + 1;
+              reg_maestro.Fecha_Ult_Lectura:= reg_maestro.Fecha_Medicion;
+            FinSi
+            Leer_Mediciones();
+          FinMientras
+
+          Segun (reg_maestro.Prom_Lecturas) Entonces
+            <20:reg_maestro.Tipo_Consumidor:= 'A';
+            <40:reg_maestro.Tipo_Consumidor:= 'B';
+            >40:reg_maestro.Tipo_Consumidor:= 'C';
+          FinSegun
+          GRABAR(arch_salida,reg_maestro);
+          Leer_Clientes();
+
+        Sino
+          reg_maestro.Id_Casa:= reg_medicion.Id_Casa;
+          reg_maestro.Fecha_Ult_Lectura:= reg_medicion.Fecha_Medicion;
+          reg_maestro.Cant_Lecturas:=1;
+          reg_maestro.Prom_Lecturas := reg_medicion.Consumo;
+          Mientras (reg_maestro.Id_Casa = reg_medicion.Id_Casa) Hacer
+            Si(reg_medicion.Fecha_Medicion < 2015) o ((reg_medicion.Fecha_Medicion.aaaa = 2015) y (reg_medicion.Fecha_Medicion.mm = 1)) Entonces
+              reg_maestro.Prom_Lecturas:=(reg_maestro.Cant_Lecturas * reg_maestro.Prom_Lecturas) + reg_medicion.Consumo / reg_maestro.Cant_Lecturas+1;
+              reg_maestro.Cant_Lecturas:= reg_maestro.Cant_Lecturas +1;
+              reg_maestro.Fecha_Ult_Lectura:= reg_medicion.Fecha_Medicion;
+            FinSi
+            Leer_Mediciones(); 
+          FinMientras
+          Segun (reg_maestro.Prom_Lecturas) Entonces
+            <20: reg_maestro.Tipo_Consumidor:= 'A';
+            <40: reg_maestro.Tipo_Consumidor:= 'B';
+            >40: reg_maestro.Tipo_Consumidor:= 'C';
+          FinSegun
+          GRABAR(arch_salida, reg_maestro);
+
+      FinSi
+    FinSi
+  FinMientras
+
+  Cerrar(arch_maestro);
+  Cerrar(arch_medicion);
+  Cerrar(arch_salida);
+
+FinAccion
+
+          
