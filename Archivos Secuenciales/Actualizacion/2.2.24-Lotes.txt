@@ -1,0 +1,101 @@
+Accion 2.2.24-(Actualizacion por Lotes) Es
+
+  Ambiente
+  Fecha= Registro Es
+    dd: 1..31;
+    mm: 1..12;
+    aaaa:N(4);
+  FinRegistro
+
+  Costos_Por_Afiliados = Registro Es
+    Cod_Afiliados: N(4);
+    Fecha_Alta: Fecha;
+    Fecha_Baja: Fecha;
+    Cant_Servicios: AN(6);
+    Costo: N(10);
+  FinRegistro
+
+  Servicios_Semanales = Registro Es
+    Cod_Afiliados:N(4);
+    Fecha_At: Fecha;
+    Cod_Servicio: AN(10);
+    Costo: N(10);
+  FinRegistro
+
+  arch_maestro, arch_salida: Archivo de Costos_Por_Afiliados ordenado por Cod_Afiliados;
+  registro_maestro, registro_salida: Costos_Por_Afiliados;
+  arch_movimiento: Archivo de Servicios_Semanales ordenado por Cod_Afiliados, Fecha_At ;
+  registro_movimiento: Servicios_Semanales;
+
+  cantidadServicios, cantidadCosto: Entero;
+
+  Procedimiento Leer_Maestro()Es
+    Leer(arch_maestro,registro_maestro);
+    Si FDA(arch_maestro) Entonces
+      registro_maestro.Cod_Afiliados:= HV;
+    FinSi
+  FinProcedimiento
+
+  Procedimiento Leer_Movimiento() Es
+    Leer(arch_movimiento,registro_movimiento);
+    Si FDA(arch_movimiento) Entonces
+      registro_movimiento.Cod_Afiliados:= HV;
+    FinSi
+  FinProcedimiento
+
+  Proceso
+  ABRIR E/(arch_maestro);
+  ABRIR E/(arch_movimiento);
+  ABRIR /S(arch_salida);
+  Leer_Maestro();
+  Leer_Movimiento();
+  cantidadCosto:=0;
+  cantidadServicios:=0;
+  Mientras (registro_maestro.Cod_Afiliados <> HV) o ( registro_movimiento.Cod_Afiliados <> HV) Hacer
+    Si(registro_maestro.Cod_Afiliados > registro_movimiento.Cod_Afiliados) Entonces
+      Si(registro_movimiento.Cod_Servicio = 001) Entonces
+        registro_salida.Cod_Afiliados := registro_movimiento.Cod_Afiliados;
+        registro_salida.Fecha_Alta:= registro_movimiento.Fecha_Alta;
+        registro_salida.Costo:= registro_movimiento.Costo;
+        Escribir(arch_salida,registro_salida);
+        Sino
+        Escribir("Error de ALTA");
+      FinSi
+      Leer_Movimiento();
+      Sino
+        Si(registro_maestro.Cod_Afiliados = registro_movimiento.Cod_Afiliados) Entonces
+          Mientras (registro_maestro.Cod_Afiliados = registro_movimiento.Cod_Afiliados) Hacer
+            Si (registro_movimiento.Cod_Servicio = 000) Entonces
+              registro_salida := registro_movimiento;
+              registro_salida.Fecha_Alta := registro_movimiento.Fecha_At;
+              Sino
+              cantidadServicios:= cantidadServicios + 1;
+              cantidadCosto:= cantidadCosto + registro_movimiento.Costo;
+              registro_salida:= registro_movimiento;
+              registro_salida.Cant_Servicios:= registro_salida.Cant_Servicios + cantidadServicios;
+              registro_salida.Costo:= registro_salida.Costo + cantidadCosto;
+            FinSi
+            Leer_Movimiento();
+          FinMientras
+          Escribir(arch_maestro,registro_salida);
+          Leer_Maestro();
+          Sino
+            Si(registro_maestro.Cod_Afiliados < registro_movimiento.Cod_Afiliados) Entonces
+              registro_salida:= registro_movimiento;
+              Escribir(arch_salida, registro_salida);
+              Leer_Maestro();
+            FinSi
+        FinSi
+    FinSi
+  FinMientras
+  CERRAR(arch_maestro);
+  CERRAR(arch_movimiento);
+  CERRAR(arch_salida);
+
+FinAccion
+
+
+
+
+
+
